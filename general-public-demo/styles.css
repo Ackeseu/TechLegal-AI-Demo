@@ -3,6 +3,8 @@
   --bg: #fbf4e8;
   --surface: rgba(255, 251, 245, 0.78);
   --surface-strong: #fff8ef;
+  --font-sans: "Avenir Next", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
   --ink: #17202c;
   --muted: #5b6673;
   --accent: #dd6b20;
@@ -21,7 +23,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-sans);
   color: var(--ink);
   background:
     radial-gradient(circle at 8% 12%, rgba(250, 204, 21, 0.24), transparent 20%),
@@ -155,7 +157,7 @@ main {
 h1,
 h2,
 h3 {
-  font-family: "Fraunces", serif;
+  font-family: var(--font-serif);
   letter-spacing: -0.03em;
 }
 
