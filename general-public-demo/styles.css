@@ -644,6 +644,49 @@ h1 {
   padding-left: 18px;
 }
 
+.history-preview {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.64);
+  border: 1px solid rgba(23, 32, 44, 0.08);
+}
+
+.history-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.history-kicker {
+  color: #72809b;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.history-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.history-item {
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(23, 32, 44, 0.08);
+}
+
+.history-item strong {
+  display: block;
+}
+
+.history-item p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .panel,
 .use-cases {
   margin-top: 34px;
@@ -764,6 +807,11 @@ h1 {
 
   .result-preview-head {
     flex-direction: column;
+  }
+
+  .history-head {
+    flex-direction: column;
+    align-items: start;
   }
 
   .nav {
