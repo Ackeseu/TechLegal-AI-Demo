@@ -455,6 +455,61 @@ h1 {
   align-items: start;
 }
 
+@media (max-width: 1380px) {
+  .shell {
+    grid-template-columns: 286px minmax(0, 1fr);
+  }
+
+  .content {
+    padding: 28px 28px 36px;
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 4.4vw, 4.2rem);
+    max-width: 11ch;
+  }
+
+  .masthead {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 330px);
+  }
+
+  .signal-ribbon {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .signal-card.priority {
+    grid-column: 1 / -1;
+  }
+
+  .hero-grid,
+  .workspace-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(290px, 0.78fr);
+  }
+}
+
+@media (max-width: 1240px) {
+  .masthead {
+    grid-template-columns: 1fr;
+  }
+
+  .masthead-copy {
+    max-width: none;
+  }
+
+  .masthead-tools {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero-grid,
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-ribbon {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .prompt-panel,
 .insight-panel,
 .feature-table,
@@ -701,6 +756,11 @@ h1 {
   }
 
   .masthead-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-ribbon,
+  .hero-graphic-grid {
     grid-template-columns: 1fr;
   }
 
