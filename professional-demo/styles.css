@@ -185,6 +185,26 @@ h2 {
   padding: 34px 36px 42px;
 }
 
+.mobile-sidebar-bar {
+  display: none;
+  margin-bottom: 18px;
+}
+
+.mobile-sidebar-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .hero-grid,
 .workspace-grid,
 .prompt-header,
@@ -700,6 +720,68 @@ h1 {
   align-items: start;
 }
 
+.output-preview-panel {
+  margin-top: 20px;
+  padding: 24px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.018)), var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.compact-output-head {
+  margin-bottom: 16px;
+}
+
+.output-preview-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.9fr 0.95fr;
+  gap: 12px;
+}
+
+.output-preview-card {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.output-preview-card.strong {
+  background: linear-gradient(160deg, rgba(16, 46, 58, 0.76), rgba(17, 29, 43, 0.85));
+}
+
+.output-preview-card.accent {
+  background: linear-gradient(160deg, rgba(50, 40, 18, 0.58), rgba(17, 29, 43, 0.88));
+}
+
+.output-preview-card span {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: #8ea3bb;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.output-preview-card strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.02rem;
+  font-family: "Source Serif 4", serif;
+}
+
+.output-preview-card p,
+.output-preview-card li {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.output-preview-card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -718,8 +800,17 @@ h1 {
   }
 
   .sidebar {
+    display: none;
     border-right: 0;
     border-bottom: 1px solid var(--line);
+  }
+
+  .sidebar.open {
+    display: block;
+  }
+
+  .mobile-sidebar-bar {
+    display: block;
   }
 
   .masthead,
@@ -761,6 +852,14 @@ h1 {
 
   .signal-ribbon,
   .hero-graphic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .output-preview-panel {
+    padding: 20px;
+  }
+
+  .output-preview-grid {
     grid-template-columns: 1fr;
   }
 

@@ -114,7 +114,7 @@
           </label>
 
           <div class="workspace-actions">
-            <button class="primary-button large">Get guidance</button>
+            <button class="primary-button large" id="generateGuidanceBtn">Get guidance</button>
             <button class="soft-button">Attach file</button>
           </div>
 
@@ -129,6 +129,34 @@
             This assistant provides practical guidance and draft support. It does not replace advice
             from a qualified lawyer.
           </p>
+
+          <section class="result-preview" aria-live="polite">
+            <div class="result-preview-head">
+              <div>
+                <p class="workspace-kicker">Sample answer state</p>
+                <h3 id="resultTitle">Recommended next steps</h3>
+              </div>
+              <span class="chip result-chip" id="resultBadge">Ask mode</span>
+            </div>
+            <div class="result-grid" id="resultGrid">
+              <article class="result-card warm">
+                <span>What this means</span>
+                <p>Start with a short explanation of the issue in plain English before moving into legal options.</p>
+              </article>
+              <article class="result-card minty">
+                <span>Do this first</span>
+                <ul>
+                  <li>Write down the timeline</li>
+                  <li>Keep screenshots and messages</li>
+                  <li>List what outcome you want</li>
+                </ul>
+              </article>
+              <article class="result-card sky">
+                <span>Escalate if needed</span>
+                <p>Show when the user should move from AI guidance to a lawyer, tribunal, or official support channel.</p>
+              </article>
+            </div>
+          </section>
         </section>
       </section>
 

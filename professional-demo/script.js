@@ -284,6 +284,140 @@ const workspaceRows = document.getElementById("workspaceRows");
 const trustLabel = document.getElementById("trustLabel");
 const trustTitle = document.getElementById("trustTitle");
 const trustList = document.getElementById("trustList");
+const outputTitle = document.getElementById("outputTitle");
+const outputBadge = document.getElementById("outputBadge");
+const outputPreviewGrid = document.getElementById("outputPreviewGrid");
+const mobileSidebarToggle = document.getElementById("mobileSidebarToggle");
+const professionalSidebar = document.getElementById("professionalSidebar");
+
+const outputContent = {
+  "ask-legal-ai": {
+    title: "Example assistant output",
+    badge: "Client-ready summary",
+    cards: [
+      {
+        tone: "strong",
+        label: "Priority issue",
+        title: "Summarise the problem before expanding the advice.",
+        body: "Start with the likely legal posture, then explain what facts are still missing before any definitive position is taken.",
+      },
+      {
+        label: "Recommended action",
+        list: ["Clarify the timeline", "Confirm governing documents", "Separate urgent risks from background issues"],
+      },
+      {
+        tone: "accent",
+        label: "Shareable format",
+        body: "The same content should be easy to convert into an internal note, client email, or management summary.",
+      },
+    ],
+  },
+  research: {
+    title: "Example research output",
+    badge: "Internal memo style",
+    cards: [
+      {
+        tone: "strong",
+        label: "Research note",
+        title: "Restrictive covenant likely turns on role, duration, and legitimate business interest.",
+        body: "The output should surface the issue rule, missing facts, and authority direction instead of only providing a plain-language answer.",
+      },
+      {
+        label: "What the note includes",
+        list: ["Issue framing", "Authority direction", "Missing assumptions"],
+      },
+      {
+        tone: "accent",
+        label: "Handoff",
+        body: "Enable direct conversion into a short client update or a fuller internal memo outline.",
+      },
+    ],
+  },
+  search: {
+    title: "Example search output",
+    badge: "Retrieval summary",
+    cards: [
+      {
+        tone: "strong",
+        label: "Top cluster",
+        title: "Most relevant authorities align with repeated service failure and termination-for-breach analysis.",
+        body: "A useful search result groups direct matches, background authorities, and analogous cases instead of one flat list.",
+      },
+      {
+        label: "Output structure",
+        list: ["Direct matches", "Worth checking", "Context only"],
+      },
+      {
+        tone: "accent",
+        label: "Next move",
+        body: "Let the user send promising authorities directly into research or client-note workflows.",
+      },
+    ],
+  },
+  "draft-contracts": {
+    title: "Example drafting output",
+    badge: "First draft view",
+    cards: [
+      {
+        tone: "strong",
+        label: "Draft posture",
+        title: "Balanced Hong Kong-governed NDA produced with negotiation-ready clause framing.",
+        body: "The first draft should already reflect party roles, governing law, and the requested commercial stance.",
+      },
+      {
+        label: "Included modules",
+        list: ["Core clauses", "Optional negotiation points", "Board-facing summary"],
+      },
+      {
+        tone: "accent",
+        label: "Review path",
+        body: "Give the legal team a fast route into redlining or clause-by-clause explanation after generation.",
+      },
+    ],
+  },
+  "review-documents": {
+    title: "Example review output",
+    badge: "Client-ready summary",
+    cards: [
+      {
+        tone: "strong",
+        label: "Priority issue",
+        title: "Liability allocation needs revision before signature.",
+        body: "Supplier-side drafting overexposes the customer on indemnity and weakens the practical recovery path.",
+      },
+      {
+        label: "Recommended action",
+        list: ["Revise indemnity scope", "Tighten termination support", "Clarify service credit remedies"],
+      },
+      {
+        tone: "accent",
+        label: "Shareable format",
+        body: "Present findings as a short internal note, client email, or redline rationale depending on audience.",
+      },
+    ],
+  },
+  "matter-workspace": {
+    title: "Example management output",
+    badge: "Weekly summary",
+    cards: [
+      {
+        tone: "strong",
+        label: "Leadership summary",
+        title: "Three matters need escalation this week and contract review volume remains concentrated in procurement work.",
+        body: "Operational views should help leadership understand workload, risk mix, and unresolved items quickly.",
+      },
+      {
+        label: "Report contents",
+        list: ["Open red-risk matters", "Volume by workflow", "Bottlenecks and approvals"],
+      },
+      {
+        tone: "accent",
+        label: "Decision support",
+        body: "Translate matter activity into staffing, escalation, or commercial decision points for management review.",
+      },
+    ],
+  },
+};
 
 let activeView = "ask-legal-ai";
 
@@ -316,6 +450,19 @@ const renderView = (viewKey) => {
   trustLabel.textContent = content.trustLabel;
   trustTitle.textContent = content.trustTitle;
   trustList.innerHTML = content.trustItems.map((item) => `<li>${item}</li>`).join("");
+
+  const output = outputContent[viewKey] || outputContent["ask-legal-ai"];
+  outputTitle.textContent = output.title;
+  outputBadge.textContent = output.badge;
+  outputPreviewGrid.innerHTML = output.cards
+    .map((card) => {
+      const body = card.list
+        ? `<ul>${card.list.map((item) => `<li>${item}</li>`).join("")}</ul>`
+        : `<p>${card.body}</p>`;
+
+      return `<article class="output-preview-card ${card.tone || ""}"><span>${card.label}</span>${card.title ? `<strong>${card.title}</strong>` : ""}${body}</article>`;
+    })
+    .join("");
 };
 
 navItems.forEach((item) => {
@@ -357,3 +504,11 @@ for (const tab of tabs) {
 }
 
 renderView(activeView);
+
+if (mobileSidebarToggle && professionalSidebar) {
+  mobileSidebarToggle.addEventListener("click", () => {
+    const nextExpanded = !professionalSidebar.classList.contains("open");
+    professionalSidebar.classList.toggle("open", nextExpanded);
+    mobileSidebarToggle.setAttribute("aria-expanded", String(nextExpanded));
+  });
+}

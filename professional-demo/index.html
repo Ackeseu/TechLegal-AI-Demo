@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="shell">
-      <aside class="sidebar">
+      <aside class="sidebar" id="professionalSidebar">
         <a class="brand" href="../index.html">
           <span class="brand-badge">TL</span>
           <span>
@@ -87,6 +87,9 @@
       </aside>
 
       <main class="content">
+        <div class="mobile-sidebar-bar">
+          <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" type="button" aria-expanded="false" aria-controls="professionalSidebar">Browse workflows</button>
+        </div>
         <header class="masthead">
           <div class="masthead-copy">
             <p class="eyebrow" id="eyebrowText">Hong Kong legal operations</p>
@@ -251,6 +254,35 @@
               <li>Clear handoff path to a human legal professional</li>
             </ul>
           </article>
+        </section>
+
+        <section class="output-preview-panel">
+          <div class="section-top compact-output-head">
+            <div>
+              <p class="panel-label">Sample output</p>
+              <h2 id="outputTitle">Example review output</h2>
+            </div>
+            <span class="status-pill" id="outputBadge">Client-ready summary</span>
+          </div>
+          <div class="output-preview-grid" id="outputPreviewGrid">
+            <article class="output-preview-card strong">
+              <span>Priority issue</span>
+              <strong>Liability allocation needs revision before signature.</strong>
+              <p>Supplier-side drafting overexposes the customer on indemnity and weakens the practical recovery path.</p>
+            </article>
+            <article class="output-preview-card">
+              <span>Recommended action</span>
+              <ul>
+                <li>Revise indemnity scope</li>
+                <li>Tighten termination support</li>
+                <li>Clarify service credit remedies</li>
+              </ul>
+            </article>
+            <article class="output-preview-card accent">
+              <span>Shareable format</span>
+              <p>Present findings as a short internal note, client email, or redline rationale depending on audience.</p>
+            </article>
+          </div>
         </section>
       </main>
     </div>
