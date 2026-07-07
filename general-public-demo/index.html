@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechLegalAI | Everyday Legal Help</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">TL</span>
+        <span class="brand-copy">
+          <strong>TechLegalAI</strong>
+          <small>Hong Kong Edition</small>
+        </span>
+      </a>
+      <nav class="nav">
+        <a href="#how-it-works">How it works</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#trust">Trust</a>
+      </nav>
+      <button class="ghost-button">Talk to Support</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">English-first legal help for Hong Kong</p>
+          <h1>Ask legal questions in plain English.</h1>
+          <p class="lede">
+            A calmer legal AI interface for individuals, families, and small businesses who need a
+            starting point before speaking to a professional.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#workspace">Try a question</a>
+            <a class="text-link" href="#use-cases">See common scenarios</a>
+          </div>
+          <ul class="hero-points" aria-label="Highlights">
+            <li>Simple English answers</li>
+            <li>Hong Kong-oriented examples</li>
+            <li>Human support when needed</li>
+          </ul>
+
+          <section class="story-strip" aria-label="Illustrative guidance preview">
+            <article class="story-card emphasis">
+              <span class="story-label">72-hour plan</span>
+              <strong>From issue to checklist</strong>
+              <p>Turn a stressful legal question into a calm first-step action list with documents, wording, and escalation cues.</p>
+            </article>
+            <div class="story-stack">
+              <article class="story-card compact mint">
+                <span class="story-label">Example</span>
+                <strong>Tenancy deposit</strong>
+                <p>Gather the agreement, payment proof, and move-out evidence.</p>
+              </article>
+              <article class="story-card compact peach">
+                <span class="story-label">Tone</span>
+                <strong>Plain English</strong>
+                <p>Explain the legal issue before introducing harder terminology.</p>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <section class="workspace-card" id="workspace" aria-label="AI workspace">
+          <div class="workspace-glow workspace-glow-a" aria-hidden="true"></div>
+          <div class="workspace-glow workspace-glow-b" aria-hidden="true"></div>
+          <div class="workspace-head">
+            <div>
+              <p class="workspace-kicker">Start here</p>
+              <h2>What would you like help with?</h2>
+            </div>
+            <span class="chip success">Hong Kong context</span>
+          </div>
+
+          <section class="workspace-graphic" aria-label="Sample response visual">
+            <div class="graphic-orbit">
+              <span class="orbit-dot orbit-dot-a"></span>
+              <span class="orbit-dot orbit-dot-b"></span>
+              <span class="orbit-dot orbit-dot-c"></span>
+            </div>
+            <div class="graphic-card primary">
+              <span>What this means</span>
+              <strong>Deposit disputes often turn on evidence quality and itemised deductions.</strong>
+            </div>
+            <div class="graphic-card secondary">
+              <span>Prepare now</span>
+              <ul>
+                <li>Tenancy agreement</li>
+                <li>Deposit receipt</li>
+                <li>Move-out photos</li>
+              </ul>
+            </div>
+          </section>
+
+          <div class="mode-switch" role="tablist" aria-label="Task mode">
+            <button class="mode-pill tone-ask active" data-mode="ask">Ask</button>
+            <button class="mode-pill tone-review" data-mode="review">Review a document</button>
+            <button class="mode-pill tone-draft" data-mode="draft">Draft a letter</button>
+          </div>
+
+          <label class="prompt-box">
+            <span class="sr-only">Legal question input</span>
+            <textarea rows="6" placeholder="Example: My landlord wants to keep my deposit after I moved out. What issues should I look at under Hong Kong practice?"></textarea>
+          </label>
+
+          <div class="workspace-actions">
+            <button class="primary-button large" id="generateGuidanceBtn">Get guidance</button>
+            <button class="soft-button">Attach file</button>
+          </div>
+
+          <div class="suggestions">
+            <button class="suggestion tone-tenancy">Tenant deposit dispute</button>
+            <button class="suggestion tone-employment">Employment termination letter</button>
+            <button class="suggestion tone-business">Small business unpaid invoice</button>
+            <button class="suggestion tone-consumer">Consumer refund issue</button>
+          </div>
+
+          <p class="note" id="trust">
+            This assistant provides practical guidance and draft support. It does not replace advice
+            from a qualified lawyer.
+          </p>
+
+          <section class="result-preview" aria-live="polite">
+            <div class="result-preview-head">
+              <div>
+                <p class="workspace-kicker">Sample answer state</p>
+                <h3 id="resultTitle">Recommended next steps</h3>
+              </div>
+              <span class="chip result-chip" id="resultBadge">Ask mode</span>
+            </div>
+            <div class="result-grid" id="resultGrid">
+              <article class="result-card warm">
+                <span>What this means</span>
+                <p>Start with a short explanation of the issue in plain English before moving into legal options.</p>
+              </article>
+              <article class="result-card minty">
+                <span>Do this first</span>
+                <ul>
+                  <li>Write down the timeline</li>
+                  <li>Keep screenshots and messages</li>
+                  <li>List what outcome you want</li>
+                </ul>
+              </article>
+              <article class="result-card sky">
+                <span>Escalate if needed</span>
+                <p>Show when the user should move from AI guidance to a lawyer, tribunal, or official support channel.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="history-preview" aria-label="Recent example history">
+            <div class="history-head">
+              <p class="workspace-kicker">Recent examples</p>
+              <span class="history-kicker">Saved locally in demo</span>
+            </div>
+            <div class="history-list">
+              <article class="history-item tone-tenancy-card">
+                <strong>Landlord keeps deposit after handover</strong>
+                <p>Asked 12 mins ago</p>
+              </article>
+              <article class="history-item tone-employment-card">
+                <strong>Employer changed notice terms by email</strong>
+                <p>Asked yesterday</p>
+              </article>
+              <article class="history-item tone-business-card">
+                <strong>Supplier invoice dispute and reminder letter</strong>
+                <p>Saved as draft</p>
+              </article>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <section class="panel" id="how-it-works">
+        <div class="section-heading">
+          <p class="eyebrow">How it works</p>
+          <h2>Made for people who do not want to think like lawyers first.</h2>
+        </div>
+        <div class="steps">
+          <article>
+            <span>1</span>
+            <h3>Describe the situation</h3>
+            <p>Use everyday language. The system translates your issue into likely legal questions.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>See structured next steps</h3>
+            <p>Get risks, documents to prepare, and practical questions to raise with a lawyer.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Escalate when needed</h3>
+            <p>Move from AI guidance to human help if the issue is urgent, complex, or high value.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="use-cases" id="use-cases">
+        <div class="section-heading">
+          <p class="eyebrow">Common scenarios</p>
+          <h2>Practical entry points for public and SME users.</h2>
+        </div>
+        <div class="case-grid">
+          <article class="case-card tone-tenancy-card">
+            <h3>Housing and tenancy</h3>
+            <p>Deposit disputes, notice periods, repairs, and landlord communication.</p>
+          </article>
+          <article class="case-card tone-employment-card">
+            <h3>Employment questions</h3>
+            <p>Resignation, dismissal, wages, notice obligations, and workplace disagreements.</p>
+          </article>
+          <article class="case-card tone-family-card">
+            <h3>Family and personal matters</h3>
+            <p>Letters, explanations, document summaries, and preparation before legal consultation.</p>
+          </article>
+          <article class="case-card tone-business-card">
+            <h3>Small business support</h3>
+            <p>Invoices, supplier disputes, basic agreements, and customer complaint handling.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel split-panel">
+        <div>
+          <p class="eyebrow">Trust and safety</p>
+          <h2>Clearer expectations build confidence.</h2>
+        </div>
+        <div class="trust-list">
+          <div>
+            <strong>Jurisdiction-aware</strong>
+            <p>Examples and language are tuned for Hong Kong users working in English.</p>
+          </div>
+          <div>
+            <strong>Bilingual-ready</strong>
+            <p>Supports English explanations even when source materials include Chinese content.</p>
+          </div>
+          <div>
+            <strong>Human fallback</strong>
+            <p>When the issue is serious, the interface nudges the user to seek qualified legal advice.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel public-service-panel" id="service-pages">
+        <div class="section-heading">
+          <p class="eyebrow">Service pages</p>
+          <h2>Explore each service in plain English for Hong Kong and Asia users.</h2>
+        </div>
+        <div class="public-service-grid">
+          <a class="public-service-card" href="./services/ai-chat.html">
+            <span>AI Chat</span>
+            <strong>Ask in everyday language</strong>
+            <p>Start from your situation and get guided next steps without legal jargon.</p>
+          </a>
+          <a class="public-service-card" href="./services/legal-research.html">
+            <span>Legal Research</span>
+            <strong>Understand rights and options</strong>
+            <p>See understandable summaries before talking to a lawyer or advisor.</p>
+          </a>
+          <a class="public-service-card" href="./services/ai-retrieval.html">
+            <span>AI Retrieval</span>
+            <strong>Find relevant laws and examples</strong>
+            <p>Search by issue so you can quickly find what is most relevant to your case.</p>
+          </a>
+          <a class="public-service-card" href="./services/text-analysis.html">
+            <span>Text Analysis</span>
+            <strong>Break down complicated documents</strong>
+            <p>Turn long letters and contracts into key points, duties, and timelines.</p>
+          </a>
+          <a class="public-service-card" href="./services/contract-generation.html">
+            <span>Contract Generation</span>
+            <strong>Create first drafts faster</strong>
+            <p>Build a starter contract in English for SME and cross-border business use.</p>
+          </a>
+          <a class="public-service-card" href="./services/contract-review.html">
+            <span>Contract Review</span>
+            <strong>Spot risks before signing</strong>
+            <p>Highlight unclear terms and prepare practical questions for legal review.</p>
+          </a>
+          <a class="public-service-card" href="./services/legal-documents.html">
+            <span>Legal Documents</span>
+            <strong>Draft letters and formal notices</strong>
+            <p>Create structured documents for complaints, payment requests, and disputes.</p>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

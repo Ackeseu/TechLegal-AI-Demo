@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechLegalAI | Professional Legal Workspace</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar" id="professionalSidebar">
+        <a class="brand" href="../index.html">
+          <span class="brand-badge">TL</span>
+          <span>
+            <strong>TechLegalAI</strong>
+            <small>Professional Suite</small>
+          </span>
+        </a>
+
+        <nav class="sidebar-nav" aria-label="Primary navigation">
+          <section class="nav-group active" data-view="ask-legal-ai">
+            <button class="nav-item active" data-view="ask-legal-ai">Ask Legal AI</button>
+            <div class="subnav" aria-label="Ask Legal AI sections">
+              <button class="subnav-item active" data-view="ask-legal-ai" data-subview="general-counsel">General Counsel Queue</button>
+              <button class="subnav-item" data-view="ask-legal-ai" data-subview="client-answer">Client Answer Builder</button>
+            </div>
+          </section>
+
+          <section class="nav-group" data-view="research">
+            <button class="nav-item" data-view="research">Research</button>
+            <div class="subnav" aria-label="Research sections">
+              <button class="subnav-item" data-view="research" data-subview="case-law">Case Law Research</button>
+              <button class="subnav-item" data-view="research" data-subview="ordinances">Ordinance Tracker</button>
+            </div>
+          </section>
+
+          <section class="nav-group" data-view="search">
+            <button class="nav-item" data-view="search">Case and Regulation Search</button>
+            <div class="subnav" aria-label="Search sections">
+              <button class="subnav-item" data-view="search" data-subview="search-cases">Similar Cases</button>
+              <button class="subnav-item" data-view="search" data-subview="search-regulations">Regulation Search</button>
+            </div>
+          </section>
+
+          <section class="nav-group" data-view="draft-contracts">
+            <button class="nav-item" data-view="draft-contracts">Draft Contracts</button>
+            <div class="subnav" aria-label="Drafting sections">
+              <button class="subnav-item" data-view="draft-contracts" data-subview="commercial-agreements">Commercial Agreements</button>
+              <button class="subnav-item" data-view="draft-contracts" data-subview="board-materials">Board Materials</button>
+            </div>
+          </section>
+
+          <section class="nav-group" data-view="review-documents">
+            <button class="nav-item" data-view="review-documents">Review Documents</button>
+            <div class="subnav" aria-label="Review sections">
+              <button class="subnav-item" data-view="review-documents" data-subview="clause-redlines">Clause Redlines</button>
+              <button class="subnav-item" data-view="review-documents" data-subview="bilingual-compare">Bilingual Compare</button>
+            </div>
+          </section>
+
+          <section class="nav-group" data-view="matter-workspace">
+            <button class="nav-item" data-view="matter-workspace">Matter Workspace</button>
+            <div class="subnav" aria-label="Matter workspace sections">
+              <button class="subnav-item" data-view="matter-workspace" data-subview="live-matters">Live Matters</button>
+              <button class="subnav-item" data-view="matter-workspace" data-subview="management-reports">Management Reports</button>
+            </div>
+          </section>
+        </nav>
+
+        <section class="sidebar-panel">
+          <p class="panel-label">Recent matters</p>
+          <div class="matter-card">
+            <strong>Shareholder dispute memo</strong>
+            <span>Updated 10 mins ago</span>
+          </div>
+          <div class="matter-card muted">
+            <strong>Lease clause review</strong>
+            <span>Waiting for upload</span>
+          </div>
+          <div class="matter-card muted">
+            <strong>SaaS supplier redline pack</strong>
+            <span>Last reviewed 2 hrs ago</span>
+          </div>
+        </section>
+
+        <section class="sidebar-panel activity-panel">
+          <p class="panel-label">Recent activity</p>
+          <div class="activity-item">
+            <strong>Research memo generated</strong>
+            <span>Employment restrictive covenant note</span>
+          </div>
+          <div class="activity-item">
+            <strong>Clause comparison completed</strong>
+            <span>EN/CN liability wording flagged</span>
+          </div>
+          <div class="activity-item">
+            <strong>Management summary queued</strong>
+            <span>Weekly approvals snapshot prepared</span>
+          </div>
+        </section>
+      </aside>
+
+      <main class="content">
+        <div class="mobile-sidebar-bar">
+          <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" type="button" aria-expanded="false" aria-controls="professionalSidebar">Browse workflows</button>
+        </div>
+        <header class="masthead">
+          <div class="masthead-copy">
+            <p class="eyebrow" id="eyebrowText">Hong Kong legal operations</p>
+            <h1 id="heroTitle">Structured legal AI for teams that need confidence, not novelty.</h1>
+            <p class="masthead-summary" id="heroSummary">A professional Hong Kong-facing workspace with stronger jurisdiction framing, cleaner decision paths, and presentation-ready outputs for legal and business teams.</p>
+            <section class="signal-ribbon" aria-label="Workflow preview graphics">
+              <article class="signal-card priority">
+                <span class="signal-label">Matter signal</span>
+                <strong>Review priority raised</strong>
+                <p>Liability cap, indemnity, and bilingual drift surfaced as the top negotiation points.</p>
+              </article>
+              <article class="signal-card mini">
+                <span class="signal-label">Source lane</span>
+                <strong>Case law + ordinance</strong>
+              </article>
+              <article class="signal-card mini amber">
+                <span class="signal-label">Escalation</span>
+                <strong>Partner review suggested</strong>
+              </article>
+            </section>
+          </div>
+          <div class="masthead-tools">
+            <div class="select-card">
+              <span>Jurisdiction</span>
+              <strong>Hong Kong</strong>
+            </div>
+            <div class="select-card">
+              <span>Output</span>
+              <strong>English</strong>
+            </div>
+            <button class="cta-secondary">Request enterprise demo</button>
+            <section class="hero-graphic" aria-label="Professional dashboard illustration">
+              <div class="hero-graphic-grid">
+                <article class="hero-node tall">
+                  <span>Risk map</span>
+                  <strong>4 active issues</strong>
+                  <div class="issue-bars">
+                    <i></i><i></i><i></i>
+                  </div>
+                </article>
+                <article class="hero-node">
+                  <span>Authority mix</span>
+                  <strong>HK-focused</strong>
+                </article>
+                <article class="hero-node ring-node">
+                  <div class="ring-graphic"><b></b></div>
+                </article>
+                <article class="hero-node full">
+                  <span>Approval path</span>
+                  <div class="approval-lane">
+                    <em>AI prep</em>
+                    <em>Legal review</em>
+                    <em>Business sign-off</em>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </header>
+
+        <section class="hero-grid">
+          <article class="prompt-panel">
+            <div class="prompt-header">
+              <div>
+                <p class="panel-label" id="panelLabel">Ask Legal AI</p>
+                <h2 id="panelTitle">Start with a legal task.</h2>
+              </div>
+              <span class="status-pill" id="statusPill">Source-aware workflow</span>
+            </div>
+
+            <div class="task-row" role="tablist" aria-label="Task templates">
+              <button class="task-tab active" data-template="research">Research</button>
+              <button class="task-tab" data-template="review">Review</button>
+              <button class="task-tab" data-template="draft">Draft</button>
+              <button class="task-tab" data-template="compare">Compare</button>
+            </div>
+
+            <label class="prompt-area">
+              <span class="sr-only">Professional legal prompt</span>
+              <textarea id="promptInput" rows="8" placeholder="Example: Summarise the enforceability risks in this non-compete clause under Hong Kong employment practice, identify missing facts, and propose a client-ready next-steps list."></textarea>
+            </label>
+
+            <div class="action-row">
+              <button class="cta-primary" id="primaryAction">Run analysis</button>
+              <button class="cta-secondary" id="secondaryAction">Attach matter files</button>
+              <button class="cta-minor" id="tertiaryAction">Use prompt template</button>
+            </div>
+
+            <div class="prompt-tags" id="promptTags">
+              <span>Employment</span>
+              <span>Commercial contracts</span>
+              <span>Cross-border matters</span>
+              <span>Board and governance</span>
+            </div>
+          </article>
+
+          <aside class="insight-panel">
+            <div class="insight-block">
+              <p class="panel-label" id="insightLabel">Why this version</p>
+              <h3 id="insightTitle">Built to look procurement-safe.</h3>
+              <p id="insightBody">
+                The layout emphasizes jurisdiction, source expectations, and repeatable workflows over
+                chatbot personality.
+              </p>
+            </div>
+            <div class="metric-grid" id="metricGrid">
+              <div>
+                <strong>4</strong>
+                <span>Core workflows</span>
+              </div>
+              <div>
+                <strong>HK</strong>
+                <span>Default jurisdiction</span>
+              </div>
+              <div>
+                <strong>EN</strong>
+                <span>Primary interface</span>
+              </div>
+              <div>
+                <strong>Bilingual</strong>
+                <span>Document-ready</span>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="workspace-grid">
+          <article class="feature-table">
+            <div class="section-top">
+              <p class="panel-label" id="workspaceLabel">Core workflows</p>
+              <h2 id="workspaceTitle">Designed around legal jobs, not feature labels.</h2>
+            </div>
+            <div class="rows" id="workspaceRows">
+              <div class="row">
+                <strong>Research</strong>
+                <p>Issue spotting, case orientation, regulation lookup, and structured summaries.</p>
+              </div>
+              <div class="row">
+                <strong>Review</strong>
+                <p>Clause risk explanation, missing term detection, and negotiation points.</p>
+              </div>
+              <div class="row">
+                <strong>Draft</strong>
+                <p>First-pass contracts, letters, board materials, and internal guidance notes.</p>
+              </div>
+              <div class="row">
+                <strong>Compare</strong>
+                <p>English-Chinese clause alignment and document delta review for cross-border work.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="trust-panel">
+            <div class="section-top">
+              <p class="panel-label" id="trustLabel">Trust layer</p>
+              <h2 id="trustTitle">Signals that matter to legal teams.</h2>
+            </div>
+            <ul id="trustList">
+              <li>Jurisdiction pinned at the top of the workflow</li>
+              <li>Professional disclaimers near the point of action</li>
+              <li>Support for bilingual source materials</li>
+              <li>Clear handoff path to a human legal professional</li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="output-preview-panel">
+          <div class="section-top compact-output-head">
+            <div>
+              <p class="panel-label">Sample output</p>
+              <h2 id="outputTitle">Example review output</h2>
+            </div>
+            <span class="status-pill" id="outputBadge">Client-ready summary</span>
+          </div>
+          <div class="output-preview-grid" id="outputPreviewGrid">
+            <article class="output-preview-card strong">
+              <span>Priority issue</span>
+              <strong>Liability allocation needs revision before signature.</strong>
+              <p>Supplier-side drafting overexposes the customer on indemnity and weakens the practical recovery path.</p>
+            </article>
+            <article class="output-preview-card">
+              <span>Recommended action</span>
+              <ul>
+                <li>Revise indemnity scope</li>
+                <li>Tighten termination support</li>
+                <li>Clarify service credit remedies</li>
+              </ul>
+            </article>
+            <article class="output-preview-card accent">
+              <span>Shareable format</span>
+              <p>Present findings as a short internal note, client email, or redline rationale depending on audience.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="service-pages-panel" id="service-pages">
+          <div class="section-top compact-output-head">
+            <div>
+              <p class="panel-label">Service architecture</p>
+              <h2>Dedicated English pages for Hong Kong and Asia workflows</h2>
+            </div>
+            <span class="status-pill">Multi-page service stack</span>
+          </div>
+          <div class="service-page-grid">
+            <a class="service-page-card" href="./services/ai-chat.html">
+              <span>AI Chat</span>
+              <strong>Conversation-led legal triage and task routing</strong>
+              <p>Use guided prompts for public users, in-house legal teams, and cross-border questions.</p>
+            </a>
+            <a class="service-page-card" href="./services/legal-research.html">
+              <span>Legal Research</span>
+              <strong>Authority-focused issue research for Hong Kong and Asia matters</strong>
+              <p>Move from issue framing to memo-ready analysis with clear jurisdiction signaling.</p>
+            </a>
+            <a class="service-page-card" href="./services/ai-retrieval.html">
+              <span>AI Retrieval</span>
+              <strong>Find relevant cases, regulations, and factual analogies quickly</strong>
+              <p>Different retrieval lanes for similar cases, ordinance search, and document-driven lookup.</p>
+            </a>
+            <a class="service-page-card" href="./services/text-analysis.html">
+              <span>Text Analysis</span>
+              <strong>Extract obligations, risks, timelines, and compliance requirements</strong>
+              <p>Turn long source materials into structured findings and action lists.</p>
+            </a>
+            <a class="service-page-card" href="./services/contract-generation.html">
+              <span>Contract Generation</span>
+              <strong>Generate first-pass contracts in English with Asia-ready controls</strong>
+              <p>Set governing law, clause posture, and commercial context before generation.</p>
+            </a>
+            <a class="service-page-card" href="./services/contract-review.html">
+              <span>Contract Review</span>
+              <strong>Flag risks, suggest redlines, and prepare negotiation notes</strong>
+              <p>Designed for legal operations, procurement, and regional commercial teams.</p>
+            </a>
+            <a class="service-page-card" href="./services/legal-documents.html">
+              <span>Legal Documents</span>
+              <strong>Draft letters, notices, submissions, and internal legal summaries</strong>
+              <p>Standardized templates for client-ready and management-ready outputs.</p>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
