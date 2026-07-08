@@ -1146,6 +1146,34 @@ h1 {
   transition: transform 220ms ease, filter 220ms ease;
 }
 
+.focus-consultation {
+  object-position: 52% 40%;
+}
+
+.focus-library {
+  object-position: 50% 40%;
+}
+
+.focus-court-exterior {
+  object-position: 50% 42%;
+}
+
+.focus-advice-scheme {
+  object-position: 53% 44%;
+}
+
+.focus-commercial {
+  object-position: 52% 42%;
+}
+
+.focus-court-documents {
+  object-position: 52% 48%;
+}
+
+.focus-court-interior {
+  object-position: 52% 42%;
+}
+
 .public-service-card:nth-child(3n + 1) {
   border-color: rgba(221, 107, 32, 0.24);
   background: linear-gradient(155deg, rgba(255, 245, 233, 0.92), rgba(255, 255, 255, 0.82));
@@ -1333,6 +1361,34 @@ h1 {
     height: 118px;
   }
 
+  .focus-consultation {
+    object-position: 56% 40%;
+  }
+
+  .focus-library {
+    object-position: 50% 36%;
+  }
+
+  .focus-court-exterior {
+    object-position: 50% 35%;
+  }
+
+  .focus-advice-scheme {
+    object-position: 58% 42%;
+  }
+
+  .focus-commercial {
+    object-position: 56% 38%;
+  }
+
+  .focus-court-documents {
+    object-position: 54% 46%;
+  }
+
+  .focus-court-interior {
+    object-position: 56% 40%;
+  }
+
   .prompt-box textarea {
     min-height: 132px;
     border-radius: 18px;
@@ -1393,6 +1449,14 @@ h1 {
 
   .service-headline-image {
     height: 112px;
+  }
+
+  .focus-advice-scheme {
+    object-position: 60% 40%;
+  }
+
+  .focus-court-documents {
+    object-position: 56% 44%;
   }
 
   .panel::before,
