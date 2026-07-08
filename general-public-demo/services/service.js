@@ -134,30 +134,115 @@ const publicSceneConfig = {
   "ai-chat": {
     lead: "Helpful legal discussion in plain English",
     support: "Show users a friendly advice-first environment before formal legal consultation.",
+    scenes: ["discussion", "meeting"],
   },
   "legal-research": {
     lead: "Research support explained like a conversation",
     support: "Translate legal context into approachable points people can act on.",
+    scenes: ["consultation", "document"],
   },
   "ai-retrieval": {
     lead: "Guided case retrieval with human-style framing",
     support: "Present relevant information as understandable pathways instead of raw data dumps.",
+    scenes: ["document", "discussion"],
   },
   "text-analysis": {
     lead: "Document review with simple visual explanations",
     support: "Break complex clauses into understandable highlights and practical actions.",
+    scenes: ["document", "meeting"],
   },
   "contract-generation": {
     lead: "Collaborative drafting visuals for public and SME users",
     support: "Create confidence with clear layouts, meeting cues, and editable structure.",
+    scenes: ["meeting", "consultation"],
   },
   "contract-review": {
     lead: "Risk review presented like advisor guidance",
     support: "Help users see why a clause matters and what to ask next in a meeting.",
+    scenes: ["consultation", "discussion"],
   },
   "legal-documents": {
     lead: "Formal document help with approachable visuals",
     support: "Move from intent to letter-ready output with calm, human-friendly direction.",
+    scenes: ["document", "meeting"],
+  },
+};
+
+const publicSceneTemplates = {
+  discussion: {
+    label: "Lawyer discussion",
+    title: "Helpful case conversation",
+    artClass: "scene-art-discussion",
+    art: `
+      <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+        <rect x="0" y="0" width="320" height="180" rx="18" fill="rgba(255,247,236,0.96)" />
+        <rect x="40" y="112" width="240" height="32" rx="10" fill="rgba(255,255,255,0.7)" />
+        <circle cx="96" cy="84" r="24" fill="rgba(15,118,110,0.34)" />
+        <rect x="74" y="108" width="44" height="24" rx="8" fill="rgba(15,118,110,0.56)" />
+        <circle cx="224" cy="80" r="24" fill="rgba(245,158,11,0.34)" />
+        <rect x="202" y="104" width="44" height="24" rx="8" fill="rgba(245,158,11,0.56)" />
+        <rect x="124" y="70" width="72" height="30" rx="10" fill="rgba(255,255,255,0.9)" />
+        <path d="M146 100h20l-9 10z" fill="rgba(255,255,255,0.9)" />
+        <path d="M136 82h48" stroke="rgba(23,32,44,0.35)" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M136 90h30" stroke="rgba(23,32,44,0.28)" stroke-width="2.5" stroke-linecap="round" />
+      </svg>
+    `,
+  },
+  meeting: {
+    label: "Document meeting",
+    title: "Contracts and next-step planning",
+    artClass: "scene-art-meeting",
+    art: `
+      <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+        <rect x="0" y="0" width="320" height="180" rx="18" fill="rgba(252,248,238,0.96)" />
+        <rect x="48" y="56" width="94" height="62" rx="10" fill="rgba(255,255,255,0.86)" stroke="rgba(23,32,44,0.18)" />
+        <path d="M62 76h64" stroke="rgba(23,32,44,0.24)" stroke-width="3" stroke-linecap="round" />
+        <path d="M62 90h50" stroke="rgba(23,32,44,0.2)" stroke-width="3" stroke-linecap="round" />
+        <rect x="154" y="60" width="118" height="74" rx="12" fill="rgba(15,118,110,0.16)" stroke="rgba(15,118,110,0.36)" />
+        <circle cx="186" cy="89" r="14" fill="rgba(15,118,110,0.44)" />
+        <circle cx="226" cy="89" r="14" fill="rgba(245,158,11,0.46)" />
+        <rect x="171" y="108" width="72" height="9" rx="5" fill="rgba(23,32,44,0.24)" />
+        <rect x="70" y="124" width="186" height="20" rx="8" fill="rgba(255,255,255,0.72)" />
+      </svg>
+    `,
+  },
+  document: {
+    label: "Legal documents",
+    title: "Contracts, clauses, and review notes",
+    artClass: "scene-art-document",
+    art: `
+      <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+        <rect x="0" y="0" width="320" height="180" rx="18" fill="rgba(253,247,235,0.96)" />
+        <rect x="54" y="40" width="98" height="118" rx="10" fill="rgba(255,255,255,0.9)" stroke="rgba(23,32,44,0.16)" />
+        <path d="M72 66h62" stroke="rgba(23,32,44,0.22)" stroke-width="3" stroke-linecap="round" />
+        <path d="M72 80h56" stroke="rgba(23,32,44,0.18)" stroke-width="3" stroke-linecap="round" />
+        <path d="M72 94h46" stroke="rgba(23,32,44,0.18)" stroke-width="3" stroke-linecap="round" />
+        <rect x="170" y="58" width="100" height="86" rx="12" fill="rgba(15,118,110,0.14)" stroke="rgba(15,118,110,0.3)" />
+        <rect x="184" y="74" width="72" height="8" rx="4" fill="rgba(15,118,110,0.5)" />
+        <rect x="184" y="90" width="56" height="8" rx="4" fill="rgba(245,158,11,0.5)" />
+        <rect x="184" y="106" width="64" height="8" rx="4" fill="rgba(23,32,44,0.24)" />
+        <circle cx="248" cy="42" r="16" fill="rgba(245,158,11,0.28)" />
+      </svg>
+    `,
+  },
+  consultation: {
+    label: "Guided consultation",
+    title: "Advisor meeting and action planning",
+    artClass: "scene-art-consultation",
+    art: `
+      <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+        <rect x="0" y="0" width="320" height="180" rx="18" fill="rgba(248,251,246,0.96)" />
+        <rect x="52" y="116" width="216" height="26" rx="10" fill="rgba(255,255,255,0.8)" />
+        <circle cx="94" cy="82" r="22" fill="rgba(15,118,110,0.3)" />
+        <rect x="74" y="104" width="40" height="24" rx="8" fill="rgba(15,118,110,0.52)" />
+        <circle cx="162" cy="78" r="20" fill="rgba(245,158,11,0.3)" />
+        <rect x="144" y="100" width="36" height="22" rx="8" fill="rgba(245,158,11,0.5)" />
+        <circle cx="226" cy="82" r="22" fill="rgba(23,32,44,0.18)" />
+        <rect x="206" y="104" width="40" height="24" rx="8" fill="rgba(23,32,44,0.3)" />
+        <rect x="112" y="54" width="94" height="24" rx="10" fill="rgba(255,255,255,0.92)" />
+        <path d="M126 66h66" stroke="rgba(23,32,44,0.26)" stroke-width="2.5" stroke-linecap="round" />
+      </svg>
+    `,
   },
 };
 
@@ -271,6 +356,23 @@ const renderPublicSceneGallery = () => {
     return;
   }
 
+  const sceneKeys = config.scenes || ["discussion", "meeting"];
+  const sceneCards = sceneKeys
+    .map((key) => publicSceneTemplates[key])
+    .filter(Boolean)
+    .map(
+      (scene) => `
+        <article class="scene-card">
+          <span>${scene.label}</span>
+          <strong>${scene.title}</strong>
+          <div class="scene-art ${scene.artClass}" aria-hidden="true">
+            ${scene.art}
+          </div>
+        </article>
+      `,
+    )
+    .join("");
+
   const panel = document.createElement("section");
   panel.className = "panel scene-gallery-panel";
   panel.innerHTML = `
@@ -279,55 +381,7 @@ const renderPublicSceneGallery = () => {
       <span class="pill">Public visual pack</span>
     </div>
     <p class="scene-summary"><strong>${config.lead}</strong> ${config.support}</p>
-    <div class="scene-grid">
-      <article class="scene-card">
-        <span>Lawyer discussion</span>
-        <strong>Helpful case conversation</strong>
-        <div class="scene-art scene-art-discussion" aria-hidden="true">
-          <svg viewBox="0 0 320 180" role="presentation" focusable="false">
-            <rect x="0" y="0" width="320" height="180" rx="18" fill="url(#talkBg)" />
-            <rect x="40" y="112" width="240" height="32" rx="10" fill="rgba(255,255,255,0.7)" />
-            <circle cx="96" cy="84" r="24" fill="rgba(15,118,110,0.34)" />
-            <rect x="74" y="108" width="44" height="24" rx="8" fill="rgba(15,118,110,0.56)" />
-            <circle cx="224" cy="80" r="24" fill="rgba(245,158,11,0.34)" />
-            <rect x="202" y="104" width="44" height="24" rx="8" fill="rgba(245,158,11,0.56)" />
-            <rect x="124" y="70" width="72" height="30" rx="10" fill="rgba(255,255,255,0.9)" />
-            <path d="M146 100h20l-9 10z" fill="rgba(255,255,255,0.9)" />
-            <path d="M136 82h48" stroke="rgba(23,32,44,0.35)" stroke-width="2.5" stroke-linecap="round" />
-            <path d="M136 90h30" stroke="rgba(23,32,44,0.28)" stroke-width="2.5" stroke-linecap="round" />
-            <defs>
-              <linearGradient id="talkBg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="rgba(255,246,233,0.96)" />
-                <stop offset="100%" stop-color="rgba(232,248,244,0.92)" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </article>
-      <article class="scene-card">
-        <span>Document meeting</span>
-        <strong>Contracts and next-step planning</strong>
-        <div class="scene-art scene-art-meeting" aria-hidden="true">
-          <svg viewBox="0 0 320 180" role="presentation" focusable="false">
-            <rect x="0" y="0" width="320" height="180" rx="18" fill="url(#meetBg)" />
-            <rect x="48" y="56" width="94" height="62" rx="10" fill="rgba(255,255,255,0.86)" stroke="rgba(23,32,44,0.18)" />
-            <path d="M62 76h64" stroke="rgba(23,32,44,0.24)" stroke-width="3" stroke-linecap="round" />
-            <path d="M62 90h50" stroke="rgba(23,32,44,0.2)" stroke-width="3" stroke-linecap="round" />
-            <rect x="154" y="60" width="118" height="74" rx="12" fill="rgba(15,118,110,0.16)" stroke="rgba(15,118,110,0.36)" />
-            <circle cx="186" cy="89" r="14" fill="rgba(15,118,110,0.44)" />
-            <circle cx="226" cy="89" r="14" fill="rgba(245,158,11,0.46)" />
-            <rect x="171" y="108" width="72" height="9" rx="5" fill="rgba(23,32,44,0.24)" />
-            <rect x="70" y="124" width="186" height="20" rx="8" fill="rgba(255,255,255,0.72)" />
-            <defs>
-              <linearGradient id="meetBg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="rgba(254,246,233,0.96)" />
-                <stop offset="100%" stop-color="rgba(236,249,246,0.9)" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </article>
-    </div>
+    <div class="scene-grid">${sceneCards}</div>
   `;
 
   workflowNode.insertAdjacentElement("afterend", panel);

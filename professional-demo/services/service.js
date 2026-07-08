@@ -118,30 +118,115 @@ const professionalSceneConfig = {
   "ai-chat": {
     lead: "Court-side intake and legal desk triage",
     support: "From initial narrative to structured matter handling for Hong Kong-focused legal teams.",
+    scenes: ["court", "desk"],
   },
   "legal-research": {
     lead: "Authority review with courtroom and library context",
     support: "Blend case-building discipline with practical memo production for regional work.",
+    scenes: ["library", "court"],
   },
   "ai-retrieval": {
     lead: "Case retrieval lanes with operational legal context",
     support: "Visualize search, ranking, and handoff as a desk-to-court continuum.",
+    scenes: ["skyline", "court"],
   },
   "text-analysis": {
     lead: "Document parsing in a formal legal workspace",
     support: "Turn dense contractual language into decision-ready legal outputs.",
+    scenes: ["desk", "library"],
   },
   "contract-generation": {
     lead: "Drafting room workflows for enterprise contracting",
     support: "Generate first drafts with clear review posture and courtroom-safe structure.",
+    scenes: ["desk", "skyline"],
   },
   "contract-review": {
     lead: "Risk review with judicial and desk-level framing",
     support: "Highlight redline priorities while preserving legal team clarity.",
+    scenes: ["court", "library"],
   },
   "legal-documents": {
     lead: "Formal document packaging with court-aware presentation",
     support: "Prepare letters, notices, and management summaries with production polish.",
+    scenes: ["library", "desk"],
+  },
+};
+
+const professionalSceneTemplates = {
+  court: {
+    label: "Hong Kong court context",
+    title: "Court building and case framing",
+    artClass: "scene-art-court",
+    art: `
+      <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+        <rect x="0" y="0" width="320" height="180" rx="18" fill="rgba(13,31,48,0.95)" />
+        <rect x="34" y="88" width="252" height="68" rx="8" fill="rgba(10,21,34,0.72)" stroke="rgba(255,255,255,0.18)" />
+        <rect x="56" y="58" width="208" height="14" rx="4" fill="rgba(79,216,199,0.38)" />
+        <rect x="64" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+        <rect x="104" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+        <rect x="144" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+        <rect x="184" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+        <rect x="224" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+        <path d="M34 88 160 24 286 88" fill="rgba(240,194,107,0.26)" stroke="rgba(240,194,107,0.52)" stroke-width="2" />
+        <circle cx="270" cy="38" r="18" fill="rgba(79,216,199,0.26)" />
+      </svg>
+    `,
+  },
+  desk: {
+    label: "Legal desk workflow",
+    title: "Books, case files, and strategy board",
+    artClass: "scene-art-desk",
+    art: `
+      <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+        <rect x="0" y="0" width="320" height="180" rx="18" fill="rgba(16,36,53,0.95)" />
+        <rect x="30" y="120" width="260" height="28" rx="8" fill="rgba(16,30,47,0.78)" />
+        <rect x="42" y="78" width="56" height="42" rx="6" fill="rgba(79,216,199,0.26)" stroke="rgba(79,216,199,0.6)" />
+        <rect x="102" y="72" width="22" height="48" rx="4" fill="rgba(255,255,255,0.74)" />
+        <rect x="126" y="66" width="22" height="54" rx="4" fill="rgba(240,194,107,0.62)" />
+        <rect x="150" y="70" width="22" height="50" rx="4" fill="rgba(255,255,255,0.66)" />
+        <rect x="178" y="88" width="92" height="24" rx="6" fill="rgba(18,42,64,0.82)" stroke="rgba(255,255,255,0.2)" />
+        <path d="M200 66h42v22h-42z" fill="rgba(240,194,107,0.34)" stroke="rgba(240,194,107,0.6)" />
+        <path d="M212 78h18" stroke="rgba(255,255,255,0.76)" stroke-width="2.5" stroke-linecap="round" />
+      </svg>
+    `,
+  },
+  skyline: {
+    label: "Harbour-facing legal district",
+    title: "City towers and institutional workflow",
+    artClass: "scene-art-skyline",
+    art: `
+      <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+        <rect x="0" y="0" width="320" height="180" rx="18" fill="rgba(10,27,43,0.95)" />
+        <rect x="0" y="116" width="320" height="64" fill="rgba(8,21,33,0.9)" />
+        <rect x="38" y="68" width="36" height="72" rx="4" fill="rgba(79,216,199,0.34)" />
+        <rect x="82" y="48" width="44" height="92" rx="4" fill="rgba(255,255,255,0.2)" />
+        <rect x="134" y="58" width="34" height="82" rx="4" fill="rgba(240,194,107,0.34)" />
+        <rect x="176" y="38" width="48" height="102" rx="4" fill="rgba(255,255,255,0.24)" />
+        <rect x="232" y="62" width="38" height="78" rx="4" fill="rgba(79,216,199,0.28)" />
+        <rect x="34" y="146" width="252" height="10" rx="5" fill="rgba(255,255,255,0.18)" />
+        <circle cx="270" cy="38" r="16" fill="rgba(240,194,107,0.35)" />
+      </svg>
+    `,
+  },
+  library: {
+    label: "Law library and reference bench",
+    title: "Authorities, books, and document review",
+    artClass: "scene-art-library",
+    art: `
+      <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+        <rect x="0" y="0" width="320" height="180" rx="18" fill="rgba(14,30,45,0.95)" />
+        <rect x="30" y="44" width="260" height="14" rx="4" fill="rgba(255,255,255,0.22)" />
+        <rect x="34" y="58" width="18" height="62" rx="4" fill="rgba(79,216,199,0.54)" />
+        <rect x="56" y="58" width="18" height="62" rx="4" fill="rgba(255,255,255,0.68)" />
+        <rect x="78" y="58" width="18" height="62" rx="4" fill="rgba(240,194,107,0.62)" />
+        <rect x="100" y="58" width="18" height="62" rx="4" fill="rgba(255,255,255,0.6)" />
+        <rect x="122" y="58" width="18" height="62" rx="4" fill="rgba(79,216,199,0.42)" />
+        <rect x="172" y="70" width="110" height="56" rx="10" fill="rgba(11,24,38,0.82)" stroke="rgba(255,255,255,0.22)" />
+        <path d="M188 88h78" stroke="rgba(255,255,255,0.52)" stroke-width="3" stroke-linecap="round" />
+        <path d="M188 100h52" stroke="rgba(240,194,107,0.58)" stroke-width="3" stroke-linecap="round" />
+        <rect x="40" y="130" width="240" height="18" rx="8" fill="rgba(255,255,255,0.15)" />
+      </svg>
+    `,
   },
 };
 
@@ -295,6 +380,23 @@ const renderProfessionalSceneGallery = () => {
     return;
   }
 
+  const sceneKeys = config.scenes || ["court", "desk"];
+  const sceneCards = sceneKeys
+    .map((key) => professionalSceneTemplates[key])
+    .filter(Boolean)
+    .map(
+      (scene) => `
+        <article class="scene-card">
+          <span>${scene.label}</span>
+          <strong>${scene.title}</strong>
+          <div class="scene-art ${scene.artClass}" aria-hidden="true">
+            ${scene.art}
+          </div>
+        </article>
+      `,
+    )
+    .join("");
+
   const panel = document.createElement("section");
   panel.className = "panel scene-gallery-panel";
   panel.innerHTML = `
@@ -303,56 +405,7 @@ const renderProfessionalSceneGallery = () => {
       <span class="pill">Professional visual pack</span>
     </div>
     <p class="scene-summary"><strong>${config.lead}</strong> ${config.support}</p>
-    <div class="scene-grid">
-      <article class="scene-card">
-        <span>Hong Kong court context</span>
-        <strong>Court building and case framing</strong>
-        <div class="scene-art scene-art-court" aria-hidden="true">
-          <svg viewBox="0 0 320 180" role="presentation" focusable="false">
-            <rect x="0" y="0" width="320" height="180" rx="18" fill="url(#courtBg)" />
-            <rect x="34" y="88" width="252" height="68" rx="8" fill="rgba(10,21,34,0.72)" stroke="rgba(255,255,255,0.18)" />
-            <rect x="56" y="58" width="208" height="14" rx="4" fill="rgba(79,216,199,0.38)" />
-            <rect x="64" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
-            <rect x="104" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
-            <rect x="144" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
-            <rect x="184" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
-            <rect x="224" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
-            <path d="M34 88 160 24 286 88" fill="rgba(240,194,107,0.26)" stroke="rgba(240,194,107,0.52)" stroke-width="2" />
-            <circle cx="270" cy="38" r="18" fill="rgba(79,216,199,0.26)" />
-            <defs>
-              <linearGradient id="courtBg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="rgba(16,39,58,0.95)" />
-                <stop offset="100%" stop-color="rgba(9,23,37,0.9)" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </article>
-      <article class="scene-card">
-        <span>Legal desk workflow</span>
-        <strong>Books, case files, and strategy board</strong>
-        <div class="scene-art scene-art-desk" aria-hidden="true">
-          <svg viewBox="0 0 320 180" role="presentation" focusable="false">
-            <rect x="0" y="0" width="320" height="180" rx="18" fill="url(#deskBg)" />
-            <rect x="30" y="120" width="260" height="28" rx="8" fill="rgba(16,30,47,0.78)" />
-            <rect x="42" y="78" width="56" height="42" rx="6" fill="rgba(79,216,199,0.26)" stroke="rgba(79,216,199,0.6)" />
-            <rect x="102" y="72" width="22" height="48" rx="4" fill="rgba(255,255,255,0.74)" />
-            <rect x="126" y="66" width="22" height="54" rx="4" fill="rgba(240,194,107,0.62)" />
-            <rect x="150" y="70" width="22" height="50" rx="4" fill="rgba(255,255,255,0.66)" />
-            <rect x="178" y="88" width="92" height="24" rx="6" fill="rgba(18,42,64,0.82)" stroke="rgba(255,255,255,0.2)" />
-            <path d="M200 66h42v22h-42z" fill="rgba(240,194,107,0.34)" stroke="rgba(240,194,107,0.6)" />
-            <path d="M212 78h18" stroke="rgba(255,255,255,0.76)" stroke-width="2.5" stroke-linecap="round" />
-            <circle cx="274" cy="48" r="14" fill="rgba(255,255,255,0.12)" />
-            <defs>
-              <linearGradient id="deskBg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="rgba(11,29,44,0.96)" />
-                <stop offset="100%" stop-color="rgba(22,34,51,0.9)" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </article>
-    </div>
+    <div class="scene-grid">${sceneCards}</div>
   `;
 
   workflowNode.insertAdjacentElement("afterend", panel);
