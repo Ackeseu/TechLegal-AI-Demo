@@ -1204,6 +1204,52 @@ h1 {
     display: grid;
   }
 
+  .workspace-card {
+    padding: 22px;
+  }
+
+  .workspace-card::after,
+  .panel::after {
+    width: 98px;
+    height: 98px;
+    right: -20px;
+    top: -20px;
+    opacity: 0.75;
+  }
+
+  .mode-switch,
+  .workspace-actions,
+  .integration-shell,
+  .result-preview,
+  .history-preview {
+    gap: 10px;
+  }
+
+  .mode-switch,
+  .workspace-actions {
+    padding: 12px;
+  }
+
+  .workspace-actions > * {
+    width: 100%;
+  }
+
+  .integration-shell {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .integration-card {
+    border-radius: 16px;
+  }
+
+  .steps article,
+  .case-card,
+  .trust-list > div,
+  .public-service-card {
+    border-width: 1.5px;
+  }
+
   .result-preview-head {
     flex-direction: column;
   }
@@ -1246,6 +1292,25 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .workspace-card {
+    padding: 18px;
+  }
+
+  .mode-switch,
+  .workspace-actions,
+  .integration-shell,
+  .result-preview,
+  .history-preview,
+  .panel {
+    padding: 12px;
+  }
+
+  .prompt-box textarea {
+    min-height: 132px;
+    border-radius: 18px;
+    padding: 16px;
+  }
+
   .graphic-lane {
     grid-column: auto;
     align-items: start;
@@ -1254,5 +1319,54 @@ h1 {
 
   .graphic-orbit {
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .section-heading {
+    gap: 8px;
+  }
+
+  .section-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+  }
+
+  .mode-switch,
+  .workspace-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-pill,
+  .ghost-button,
+  .primary-button,
+  .soft-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .public-service-grid,
+  .steps,
+  .case-grid {
+    gap: 12px;
+  }
+
+  .public-service-card,
+  .steps article,
+  .case-card,
+  .trust-list > div {
+    border-radius: 18px;
+    padding: 16px;
+  }
+
+  .panel::before,
+  .workspace-card::before {
+    opacity: 0.72;
+  }
+
+  .panel::after,
+  .workspace-card::after {
+    opacity: 0.5;
+    transform: rotate(10deg) scale(0.9);
   }
 }
