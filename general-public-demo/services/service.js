@@ -71,6 +71,167 @@ const publicDemoConfig = {
   },
 };
 
+const publicVisualConfig = {
+  "ai-chat": {
+    glyph: "AI",
+    visualTitle: "Question routing and calm-first guidance",
+    visualSummary:
+      "Turn first-contact questions into clearer legal pathways, document checklists, and escalation cues.",
+    previewLabels: ["Issue summary", "Document list", "Escalation cue"],
+    flowRail: ["Understand", "Prepare", "Escalate"],
+  },
+  "legal-research": {
+    glyph: "RS",
+    visualTitle: "Research snapshots for non-lawyers",
+    visualSummary:
+      "Convert legal context into practical takeaways users can understand before professional consultation.",
+    previewLabels: ["Context summary", "What matters", "Questions to ask"],
+    flowRail: ["Frame", "Summarize", "Ask better"],
+  },
+  "ai-retrieval": {
+    glyph: "RT",
+    visualTitle: "Situation-based reference paths",
+    visualSummary:
+      "Guide users through similar scenarios and references without overwhelming detail.",
+    previewLabels: ["Match lane", "Relevance", "Next path"],
+    flowRail: ["Search", "Narrow", "Action"],
+  },
+  "text-analysis": {
+    glyph: "TX",
+    visualTitle: "Plain-language document breakdown",
+    visualSummary:
+      "Highlight obligations, deadlines, and risky wording in a format users can scan quickly.",
+    previewLabels: ["Key clauses", "Timeline", "Risk wording"],
+    flowRail: ["Extract", "Simplify", "Checklist"],
+  },
+  "contract-generation": {
+    glyph: "DR",
+    visualTitle: "Drafting flow for everyday business use",
+    visualSummary:
+      "Build first drafts that are practical, readable, and ready for legal review.",
+    previewLabels: ["Input pack", "Draft layout", "Review notes"],
+    flowRail: ["Collect", "Draft", "Refine"],
+  },
+  "contract-review": {
+    glyph: "RV",
+    visualTitle: "Risk-first review guidance",
+    visualSummary:
+      "Surface one-sided terms and help users prepare cleaner questions for advisors.",
+    previewLabels: ["Risk flags", "Why it matters", "What to ask"],
+    flowRail: ["Spot", "Explain", "Respond"],
+  },
+  "legal-documents": {
+    glyph: "LD",
+    visualTitle: "Structured letters and formal wording",
+    visualSummary:
+      "Guide users from intent to formal output with tone and structure guardrails.",
+    previewLabels: ["Document type", "Tone", "Delivery format"],
+    flowRail: ["Choose", "Compose", "Finalize"],
+  },
+};
+
+const renderPublicServiceHeroVisual = () => {
+  const config = publicVisualConfig[activeService];
+  const metricsNode = document.querySelector(".hero-metrics");
+
+  if (!config || !metricsNode || document.querySelector(".service-hero-visual")) {
+    return;
+  }
+
+  const visual = document.createElement("div");
+  visual.className = "service-hero-visual";
+  visual.innerHTML = `
+    <div class="service-glyph">${config.glyph}</div>
+    <div class="service-hero-copy">
+      <span>Service preview</span>
+      <strong>${config.visualTitle}</strong>
+      <p>${config.previewLabels.join(" • ")}</p>
+    </div>
+  `;
+
+  metricsNode.prepend(visual);
+};
+
+const renderPublicVisualStudio = () => {
+  const config = publicVisualConfig[activeService];
+  const navNode = document.querySelector(".service-nav");
+
+  if (!config || !navNode || document.querySelector(".visual-studio-panel")) {
+    return;
+  }
+
+  const panel = document.createElement("section");
+  panel.className = "panel visual-studio-panel";
+  panel.innerHTML = `
+    <div class="panel-head">
+      <h2>${config.visualTitle}</h2>
+      <span class="pill">Guidance Studio</span>
+    </div>
+    <p class="studio-summary">${config.visualSummary}</p>
+    <div class="studio-grid">
+      <article class="studio-card studio-card-primary">
+        <span>Guidance map</span>
+        <strong>${config.flowRail[0]} to ${config.flowRail[2]}</strong>
+        <div class="studio-lane">
+          <i></i><i></i><i></i>
+        </div>
+        <p>Built for people who need clear next steps before legal language gets technical.</p>
+      </article>
+      <article class="studio-card studio-artifact-card">
+        <span>Generated visuals</span>
+        <div class="artifact-stack">
+          <div class="artifact-item artifact-item-a"><b>${config.previewLabels[0]}</b></div>
+          <div class="artifact-item artifact-item-b"><b>${config.previewLabels[1]}</b></div>
+          <div class="artifact-item artifact-item-c"><b>${config.previewLabels[2]}</b></div>
+        </div>
+      </article>
+      <article class="studio-card studio-card-secondary">
+        <span>Designed for trust</span>
+        <ul>
+          <li>Plain-English framing first</li>
+          <li>Clear preparation checklist</li>
+          <li>Visible human escalation path</li>
+        </ul>
+      </article>
+    </div>
+  `;
+
+  navNode.insertAdjacentElement("afterend", panel);
+};
+
+const renderPublicWorkflowRail = () => {
+  const config = publicVisualConfig[activeService];
+  const studioNode = document.querySelector(".visual-studio-panel");
+
+  if (!config || !studioNode || document.querySelector(".workflow-rail-panel")) {
+    return;
+  }
+
+  const panel = document.createElement("section");
+  panel.className = "panel workflow-rail-panel";
+  panel.innerHTML = `
+    <div class="panel-head">
+      <h2>Guidance flow</h2>
+      <span class="pill">Public-ready route</span>
+    </div>
+    <div class="workflow-rail-grid">
+      ${config.flowRail
+        .map(
+          (step, index) => `
+            <article class="workflow-step">
+              <span>Step ${index + 1}</span>
+              <strong>${step}</strong>
+              <p>${publicDemoConfig[activeService].steps[index] || publicDemoConfig[activeService].steps[publicDemoConfig[activeService].steps.length - 1]}</p>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+
+  studioNode.insertAdjacentElement("afterend", panel);
+};
+
 const renderPublicDemoLab = () => {
   const config = publicDemoConfig[activeService];
   const mainNode = document.querySelector("main");
@@ -174,4 +335,7 @@ const renderPublicDemoLab = () => {
   });
 };
 
+renderPublicServiceHeroVisual();
+renderPublicVisualStudio();
+renderPublicWorkflowRail();
 renderPublicDemoLab();
