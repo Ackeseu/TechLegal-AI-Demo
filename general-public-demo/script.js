@@ -87,6 +87,7 @@ let publicUploadCount = 0;
 
 const sharedConfig = window.TechLegalConfig || { mode: "demo", apiBaseUrl: "" };
 const apiClient = window.TechLegalApiClient;
+const authClient = window.TechLegalAuthClient;
 
 const escapeHtml = (value) =>
   String(value)
@@ -134,8 +135,10 @@ const fetchGuidanceContent = async (mode, promptText) => {
 const syncPublicIntegrationShell = () => {
   if (publicModeTitle && publicModeCopy) {
     if (sharedConfig.mode === "live") {
-      publicModeTitle.textContent = "Live API mode";
-      publicModeCopy.textContent = `Connected to ${sharedConfig.apiBaseUrl} for live public guidance responses.`;
+      const session = authClient?.getSession?.();
+      const roleLabel = session?.roles?.join(", ") || "anonymous";
+      publicModeTitle.textContent = authClient?.isAuthenticated?.() ? "Live API mode (authenticated)" : "Live API mode (anonymous)";
+      publicModeCopy.textContent = `Connected to ${sharedConfig.apiBaseUrl} for live guidance responses. Session role: ${roleLabel}.`;
     } else {
       publicModeTitle.textContent = "Demo mode";
       publicModeCopy.textContent = "Using built-in mock guidance until a live API base URL is configured.";
@@ -191,9 +194,35 @@ for (const suggestion of document.querySelectorAll(".suggestion")) {
 }
 
 if (attachPublicFileBtn) {
-  attachPublicFileBtn.addEventListener("click", () => {
-    publicUploadCount += 1;
-    syncPublicIntegrationShell();
+  attachPublicFileBtn.addEventListener("click", async () => {
+    const originalLabel = attachPublicFileBtn.textContent;
+    attachPublicFileBtn.disabled = true;
+    attachPublicFileBtn.textContent = "Attaching...";
+
+    try {
+      const uploaded = await apiClient?.uploadPublicDocument?.({
+        mode: activeMode,
+        fileName: `public-doc-${Date.now()}.pdf`,
+        mimeType: "application/pdf",
+        fileSizeBytes: 1024 * 80,
+      });
+
+      publicUploadCount += 1;
+      syncPublicIntegrationShell();
+
+      if (uploaded?.uploadId && publicUploadCopy) {
+        publicUploadCopy.textContent = `Live upload handshake ready. Upload id: ${uploaded.uploadId}.`;
+      }
+    } catch (_error) {
+      publicUploadCount += 1;
+      syncPublicIntegrationShell();
+      if (publicUploadCopy) {
+        publicUploadCopy.textContent = "Upload simulation completed. Live document intake can be enabled from the shared upload endpoint.";
+      }
+    } finally {
+      attachPublicFileBtn.disabled = false;
+      attachPublicFileBtn.textContent = originalLabel;
+    }
   });
 }
 

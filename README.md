@@ -113,6 +113,12 @@ After that, every push to `main` will trigger deployment.
 
 This repository is intentionally frontend-only.
 
+It now includes a production-integration scaffold in the shared layer:
+
+- `shared/app-config.js`: environment, endpoint, timeout, and role config
+- `shared/auth-client.js`: session/token/role handling from meta tags or local storage
+- `shared/api-client.js`: authenticated API calls, professional role gating, upload endpoint hooks, and normalized API errors
+
 Recommended future integration approach:
 
 1. Keep the current UI structure and replace the mock/demo content logic in the JavaScript files.
@@ -123,6 +129,26 @@ Recommended future integration approach:
    - trust metadata such as jurisdiction or confidence
    - document or source references where applicable
    - escalation flags for legal review
+
+## Production scaffold quick start
+
+To test the live-ready auth path locally, set values in browser local storage:
+
+1. `techlegal_api_base_url`: your API base URL (for example `https://api.example.com`)
+2. `techlegal_access_token`: bearer token used by the shared API client
+3. `techlegal_user_roles`: comma-separated roles (for example `professional,admin`)
+4. `techlegal_user_id`: user identifier (optional but recommended)
+5. `techlegal_session_id`: request/session trace identifier (optional)
+
+Professional endpoints are role-gated by default to `professional` or `admin`.
+You can override required roles via:
+
+- `<meta name="techlegal-professional-roles" content="professional,admin">`
+
+Public and professional upload flows are scaffolded through:
+
+- `POST /v1/public/uploads`
+- `POST /v1/professional/uploads`
 
 ## Suggested GitHub repository name
 

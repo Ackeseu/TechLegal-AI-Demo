@@ -296,6 +296,7 @@ const professionalUploadCopy = document.getElementById("professionalUploadCopy")
 
 const sharedConfig = window.TechLegalConfig || { mode: "demo", apiBaseUrl: "" };
 const apiClient = window.TechLegalApiClient;
+const authClient = window.TechLegalAuthClient;
 let professionalUploadCount = 0;
 
 const escapeHtml = (value) =>
@@ -487,11 +488,39 @@ const fetchWorkspaceOutput = async (viewKey, promptText) => {
   return normalizeBackendOutput(data, viewKey);
 };
 
+const getProfessionalAccessState = () => {
+  const requiredRoles = sharedConfig.requiredRoles?.professional || ["professional", "admin"];
+
+  if (!authClient || !authClient.isAuthenticated()) {
+    return { isAuthenticated: false, hasRole: false, roleLabel: "guest", requiredRoles };
+  }
+
+  const session = authClient.getSession();
+  const hasRole = authClient.hasAnyRole(requiredRoles);
+
+  return {
+    isAuthenticated: true,
+    hasRole,
+    roleLabel: session.roles.join(", ") || "authenticated",
+    requiredRoles,
+  };
+};
+
 const syncProfessionalIntegrationShell = () => {
   if (professionalModeTitle && professionalModeCopy) {
     if (sharedConfig.mode === "live") {
-      professionalModeTitle.textContent = "Live workspace mode";
-      professionalModeCopy.textContent = `Connected to ${sharedConfig.apiBaseUrl} for professional analysis workflows.`;
+      const access = getProfessionalAccessState();
+
+      if (!access.isAuthenticated) {
+        professionalModeTitle.textContent = "Live mode - sign in required";
+        professionalModeCopy.textContent = `Connected to ${sharedConfig.apiBaseUrl}. Authenticate with a professional account to run live analysis.`;
+      } else if (!access.hasRole) {
+        professionalModeTitle.textContent = "Live mode - role required";
+        professionalModeCopy.textContent = `Signed in as ${access.roleLabel}. Required role: ${access.requiredRoles.join(" or ")}.`;
+      } else {
+        professionalModeTitle.textContent = "Live secured workspace";
+        professionalModeCopy.textContent = `Connected to ${sharedConfig.apiBaseUrl}. Authorized as ${access.roleLabel}.`;
+      }
     } else {
       professionalModeTitle.textContent = "Demo workspace";
       professionalModeCopy.textContent = "Using local demo output until the professional analysis API is configured.";
@@ -593,9 +622,33 @@ if (primaryAction && prompt) {
       if (!liveOutput) {
         outputBadge.textContent = `${outputBadge.textContent} - Demo`;
       }
-    } catch (_error) {
-      renderOutputPreview(outputContent[activeView] || outputContent["ask-legal-ai"]);
-      outputBadge.textContent = `${outputBadge.textContent} - Fallback`;
+    } catch (error) {
+      if (error?.code === "auth_required" || error?.code === "forbidden") {
+        renderOutputPreview({
+          title: "Professional access required",
+          badge: "Secure mode",
+          cards: [
+            {
+              tone: "strong",
+              label: "Access state",
+              title: "Sign in with an authorized professional role.",
+              body: "Live analysis is protected by authentication and role checks in the shared API layer.",
+            },
+            {
+              label: "Required",
+              list: ["Authenticated session", "Professional or admin role", "Valid API token"],
+            },
+            {
+              tone: "accent",
+              label: "Fallback",
+              body: "Demo output remains available so the UI stays usable while auth is being configured.",
+            },
+          ],
+        });
+      } else {
+        renderOutputPreview(outputContent[activeView] || outputContent["ask-legal-ai"]);
+        outputBadge.textContent = `${outputBadge.textContent} - Fallback`;
+      }
     } finally {
       primaryAction.disabled = false;
       primaryAction.textContent = originalLabel;
@@ -604,9 +657,36 @@ if (primaryAction && prompt) {
 }
 
 if (secondaryAction) {
-  secondaryAction.addEventListener("click", () => {
-    professionalUploadCount += 1;
-    syncProfessionalIntegrationShell();
+  secondaryAction.addEventListener("click", async () => {
+    const originalLabel = secondaryAction.textContent;
+    secondaryAction.disabled = true;
+    secondaryAction.textContent = "Attaching...";
+
+    try {
+      const uploaded = await apiClient?.uploadProfessionalMatterFile?.({
+        workflow: activeView,
+        fileName: `matter-pack-${Date.now()}.pdf`,
+        mimeType: "application/pdf",
+        fileSizeBytes: 1024 * 120,
+      });
+
+      professionalUploadCount += 1;
+      syncProfessionalIntegrationShell();
+
+      if (uploaded?.uploadId && professionalUploadCopy) {
+        professionalUploadCopy.textContent = `Live intake handshake ready. Upload id: ${uploaded.uploadId}.`;
+      }
+    } catch (error) {
+      professionalUploadCount += 1;
+      syncProfessionalIntegrationShell();
+
+      if ((error?.code === "auth_required" || error?.code === "forbidden") && professionalUploadCopy) {
+        professionalUploadCopy.textContent = "Upload simulation completed. Live intake requires an authenticated professional role.";
+      }
+    } finally {
+      secondaryAction.disabled = false;
+      secondaryAction.textContent = originalLabel;
+    }
   });
 }
 
