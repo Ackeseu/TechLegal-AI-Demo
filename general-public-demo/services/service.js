@@ -138,8 +138,8 @@ const publicServicePhotoConfig = {
     focusClass: "focus-consultation",
   },
   "legal-research": {
-    src: "../../assets/screenshots/hk-law-library-research.jpeg",
-    alt: "Legal research scene in a law library",
+    src: "../../assets/screenshots/HK-Legal-documents.jpeg",
+    alt: "Legal documents and formal drafting in Hong Kong",
     caption: "Clause-by-clause research support",
     focusClass: "focus-library",
   },
@@ -156,8 +156,8 @@ const publicServicePhotoConfig = {
     focusClass: "focus-advice-scheme",
   },
   "contract-generation": {
-    src: "../../assets/screenshots/hk-commercial-negotiation.jpeg",
-    alt: "Commercial legal meeting in Hong Kong",
+    src: "../../assets/screenshots/HK-Contract_review.jpeg",
+    alt: "Contract review with legal papers and clause analysis",
     caption: "Drafting for business and cross-border use",
     focusClass: "focus-commercial",
   },
