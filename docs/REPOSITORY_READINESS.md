@@ -106,3 +106,20 @@ When you want to publish this repository, the next concrete steps are:
 4. Push `main`.
 
 Because GitHub CLI is already authenticated, those steps can be executed immediately once visibility is confirmed.
+
+## 10. Azure Static Web Apps setup
+
+This repository now includes:
+
+- `.github/workflows/azure-static-web-apps.yml`
+- `staticwebapp.config.json`
+
+Expected production host:
+
+- `https://zealous-desert-07a533600.7.azurestaticapps.net`
+
+Required GitHub repository secret:
+
+- `AZURE_STATIC_WEB_APPS_API_TOKEN`
+
+That secret must be copied from the Azure Static Web App deployment token in the Azure portal before the workflow can publish successfully.

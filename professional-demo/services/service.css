@@ -8,8 +8,8 @@
   --muted: #9fb2c9;
   --teal: #4fd8c7;
   --gold: #f0c26b;
-  --font-sans: "Avenir Next", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: Baskerville, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-sans: "Inter", "Manrope", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Inter", "Manrope", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --shadow: 0 24px 62px rgba(0, 8, 20, 0.42);
 }
 
@@ -79,6 +79,13 @@ h2,
 .footer-note,
 .chips span {
   color: var(--muted);
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.015em;
+  font-weight: 650;
 }
 
 .top-actions {

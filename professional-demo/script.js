@@ -290,6 +290,43 @@ const outputPreviewGrid = document.getElementById("outputPreviewGrid");
 const mobileSidebarToggle = document.getElementById("mobileSidebarToggle");
 const professionalSidebar = document.getElementById("professionalSidebar");
 
+const backendConfig = {
+  baseUrl: (window.localStorage.getItem("techlegal_api_base_url") || "").trim(),
+  timeoutMs: 14000,
+};
+
+const escapeHtml = (value) =>
+  String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+const postJson = async (url, payload) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), backendConfig.timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed with ${response.status}`);
+    }
+
+    return await response.json();
+  } finally {
+    clearTimeout(timeoutId);
+  }
+};
+
 const outputContent = {
   "ask-legal-ai": {
     title: "Example assistant output",
@@ -421,6 +458,58 @@ const outputContent = {
 
 let activeView = "ask-legal-ai";
 
+const renderOutputPreview = (output) => {
+  outputTitle.textContent = output.title;
+  outputBadge.textContent = output.badge;
+  outputPreviewGrid.innerHTML = output.cards
+    .map((card) => {
+      const body = card.list
+        ? `<ul>${card.list.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+        : `<p>${escapeHtml(card.body || "")}</p>`;
+
+      return `<article class="output-preview-card ${escapeHtml(card.tone || "")}" ><span>${escapeHtml(card.label || "")}</span>${card.title ? `<strong>${escapeHtml(card.title)}</strong>` : ""}${body}</article>`;
+    })
+    .join("");
+};
+
+const normalizeBackendOutput = (payload, viewKey) => {
+  if (!payload || typeof payload !== "object") {
+    return null;
+  }
+
+  const fallback = outputContent[viewKey] || outputContent["ask-legal-ai"];
+  const cards = Array.isArray(payload.cards)
+    ? payload.cards.slice(0, 3).map((card, index) => ({
+        tone: card.tone || fallback.cards[index]?.tone || "",
+        label: card.label || `Block ${index + 1}`,
+        title: card.title,
+        body: card.body,
+        list: Array.isArray(card.list) ? card.list.slice(0, 4) : undefined,
+      }))
+    : fallback.cards;
+
+  return {
+    title: payload.title || fallback.title,
+    badge: payload.badge || `${fallback.badge} - Live`,
+    cards,
+  };
+};
+
+const fetchWorkspaceOutput = async (viewKey, promptText) => {
+  if (!backendConfig.baseUrl) {
+    return null;
+  }
+
+  const data = await postJson(`${backendConfig.baseUrl}/v1/professional/analyze`, {
+    workflow: viewKey,
+    prompt: promptText,
+    locale: "en-HK",
+    region: "asia",
+  });
+
+  return normalizeBackendOutput(data, viewKey);
+};
+
 const renderView = (viewKey) => {
   const content = viewContent[viewKey];
 
@@ -452,17 +541,7 @@ const renderView = (viewKey) => {
   trustList.innerHTML = content.trustItems.map((item) => `<li>${item}</li>`).join("");
 
   const output = outputContent[viewKey] || outputContent["ask-legal-ai"];
-  outputTitle.textContent = output.title;
-  outputBadge.textContent = output.badge;
-  outputPreviewGrid.innerHTML = output.cards
-    .map((card) => {
-      const body = card.list
-        ? `<ul>${card.list.map((item) => `<li>${item}</li>`).join("")}</ul>`
-        : `<p>${card.body}</p>`;
-
-      return `<article class="output-preview-card ${card.tone || ""}"><span>${card.label}</span>${card.title ? `<strong>${card.title}</strong>` : ""}${body}</article>`;
-    })
-    .join("");
+  renderOutputPreview(output);
 };
 
 navItems.forEach((item) => {
@@ -500,6 +579,28 @@ for (const tab of tabs) {
     tab.classList.add("active");
     const template = tab.dataset.template;
     prompt.placeholder = templates[template] || templates.research;
+  });
+}
+
+if (primaryAction && prompt) {
+  primaryAction.addEventListener("click", async () => {
+    const originalLabel = primaryAction.textContent;
+    primaryAction.disabled = true;
+    primaryAction.textContent = "Running...";
+
+    try {
+      const liveOutput = await fetchWorkspaceOutput(activeView, prompt.value.trim());
+      renderOutputPreview(liveOutput || outputContent[activeView] || outputContent["ask-legal-ai"]);
+      if (!liveOutput) {
+        outputBadge.textContent = `${outputBadge.textContent} - Demo`;
+      }
+    } catch (_error) {
+      renderOutputPreview(outputContent[activeView] || outputContent["ask-legal-ai"]);
+      outputBadge.textContent = `${outputBadge.textContent} - Fallback`;
+    } finally {
+      primaryAction.disabled = false;
+      primaryAction.textContent = originalLabel;
+    }
   });
 }
 

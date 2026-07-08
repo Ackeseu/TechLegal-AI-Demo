@@ -5,8 +5,8 @@
   --panel: #111d2b;
   --panel-2: #132234;
   --panel-3: rgba(255, 255, 255, 0.04);
-  --font-sans: "Avenir Next", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: Baskerville, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-sans: "Inter", "Manrope", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Inter", "Manrope", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --ink: #f5f7fb;
   --muted: #9eb0c6;
   --line: rgba(255, 255, 255, 0.09);
@@ -80,6 +80,13 @@ h2 {
 .trust-panel li,
 .select-card span {
   color: var(--muted);
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.015em;
+  font-weight: 650;
 }
 
 .sidebar-nav {

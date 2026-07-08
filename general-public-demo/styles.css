@@ -3,8 +3,8 @@
   --bg: #fbf4e8;
   --surface: rgba(255, 251, 245, 0.78);
   --surface-strong: #fff8ef;
-  --font-sans: "Avenir Next", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-sans: "Inter", "Manrope", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Inter", "Manrope", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --ink: #17202c;
   --muted: #5b6673;
   --accent: #dd6b20;
@@ -158,7 +158,8 @@ h1,
 h2,
 h3 {
   font-family: var(--font-serif);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
+  font-weight: 650;
 }
 
 h1 {

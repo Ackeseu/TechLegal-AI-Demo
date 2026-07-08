@@ -92,6 +92,23 @@ No build step is required.
 2. Choose either the General Public or Professional demo.
 3. Review the UI states and interactive sample content.
 
+## Azure deployment
+
+This repository now includes an Azure Static Web Apps GitHub Actions workflow:
+
+- `.github/workflows/azure-static-web-apps.yml`
+
+Target production site:
+
+- `https://zealous-desert-07a533600.7.azurestaticapps.net`
+
+One manual step is still required before GitHub Actions can deploy successfully:
+
+1. In the GitHub repository settings, add a repository secret named `AZURE_STATIC_WEB_APPS_API_TOKEN`.
+2. Use the deployment token from the matching Azure Static Web App resource.
+
+After that, every push to `main` will trigger deployment.
+
 ## Backend integration note
 
 This repository is intentionally frontend-only.

@@ -189,3 +189,42 @@ For document workflows, likely additions:
 2. Add brand-specific copy, color system, and logo treatment.
 3. Decide whether the publish target should be public or private.
 4. Create the new GitHub repository and push the first version.
+
+## 11. Production Readiness For Dynamic Backend
+
+This demo now includes backend-ready script hooks in:
+
+- `general-public-demo/script.js`
+- `professional-demo/script.js`
+
+Current integration behavior:
+
+- if `localStorage.techlegal_api_base_url` is set, the UI attempts live POST calls
+- if no backend base URL is set (or if API fails), the UI falls back to demo content
+
+Expected example endpoints:
+
+- `POST /v1/public/guidance`
+- `POST /v1/professional/analyze`
+
+Recommended response shape:
+
+- `title`: string
+- `badge`: string
+- `cards`: array of max 3 cards
+  - `tone`: string
+  - `label`: string
+  - `title`: string (optional)
+  - `body`: string (optional)
+  - `list`: string[] (optional)
+
+Pre-production checklist:
+
+1. Add authentication and session management (JWT or signed session cookie).
+2. Add per-user and per-IP rate limits for abuse protection.
+3. Add server-side moderation, validation, and prompt injection safeguards.
+4. Add structured logging with request IDs for every generation/search call.
+5. Add analytics events for user flows (ask, search, review, draft).
+6. Add fallback handling and user-safe error messaging at API gateway level.
+7. Add observability dashboards (latency, error rate, timeout rate, model cost).
+8. Add legal/compliance review for disclaimers, retention, and privacy handling.

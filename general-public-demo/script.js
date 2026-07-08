@@ -79,18 +79,92 @@ const generateGuidanceBtn = document.getElementById("generateGuidanceBtn");
 
 let activeMode = "ask";
 
-const renderResultPreview = () => {
-  const content = resultContent[activeMode] || resultContent.ask;
+const backendConfig = {
+  baseUrl: (window.localStorage.getItem("techlegal_api_base_url") || "").trim(),
+  timeoutMs: 12000,
+};
+
+const escapeHtml = (value) =>
+  String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+const postJson = async (url, payload) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), backendConfig.timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed with ${response.status}`);
+    }
+
+    return await response.json();
+  } finally {
+    clearTimeout(timeoutId);
+  }
+};
+
+const normalizeBackendContent = (payload) => {
+  if (!payload || typeof payload !== "object") {
+    return null;
+  }
+
+  const fallback = resultContent[activeMode] || resultContent.ask;
+  const cards = Array.isArray(payload.cards)
+    ? payload.cards.slice(0, 3).map((card, index) => ({
+        tone: card.tone || fallback.cards[index]?.tone || "warm",
+        label: card.label || `Step ${index + 1}`,
+        body: card.body,
+        list: Array.isArray(card.list) ? card.list.slice(0, 4) : undefined,
+      }))
+    : fallback.cards;
+
+  return {
+    title: payload.title || fallback.title,
+    badge: payload.badge || `${fallback.badge} - Live`,
+    cards,
+  };
+};
+
+const fetchGuidanceContent = async (mode, promptText) => {
+  if (!backendConfig.baseUrl) {
+    return null;
+  }
+
+  const data = await postJson(`${backendConfig.baseUrl}/v1/public/guidance`, {
+    mode,
+    prompt: promptText,
+    locale: "en-HK",
+    region: "asia",
+  });
+
+  return normalizeBackendContent(data);
+};
+
+const renderResultPreview = (overrideContent = null) => {
+  const content = overrideContent || resultContent[activeMode] || resultContent.ask;
 
   resultTitle.textContent = content.title;
   resultBadge.textContent = content.badge;
   resultGrid.innerHTML = content.cards
     .map((card) => {
       const body = card.list
-        ? `<ul>${card.list.map((item) => `<li>${item}</li>`).join("")}</ul>`
-        : `<p>${card.body}</p>`;
+        ? `<ul>${card.list.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+        : `<p>${escapeHtml(card.body || "")}</p>`;
 
-      return `<article class="result-card ${card.tone}"><span>${card.label}</span>${body}</article>`;
+      return `<article class="result-card ${escapeHtml(card.tone || "warm")}"><span>${escapeHtml(card.label || "")}</span>${body}</article>`;
     })
     .join("");
 };
@@ -116,8 +190,21 @@ for (const suggestion of document.querySelectorAll(".suggestion")) {
   });
 }
 
-generateGuidanceBtn.addEventListener("click", () => {
-  renderResultPreview();
+generateGuidanceBtn.addEventListener("click", async () => {
+  const originalLabel = generateGuidanceBtn.textContent;
+  generateGuidanceBtn.disabled = true;
+  generateGuidanceBtn.textContent = "Generating...";
+
+  try {
+    const liveContent = await fetchGuidanceContent(activeMode, textarea.value.trim());
+    renderResultPreview(liveContent);
+  } catch (_error) {
+    renderResultPreview();
+    resultBadge.textContent = `${resultBadge.textContent} - Fallback`;
+  } finally {
+    generateGuidanceBtn.disabled = false;
+    generateGuidanceBtn.textContent = originalLabel;
+  }
 });
 
 renderResultPreview();
