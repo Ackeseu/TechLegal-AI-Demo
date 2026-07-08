@@ -24,6 +24,9 @@ const professionalDemoConfig = {
     visualTitle: "Matter intake and issue routing",
     visualSummary: "Guide users from first question to the right legal workflow with visible jurisdiction and escalation cues.",
     previewLabels: ["Intake queue", "Escalation threshold", "Answer pack"],
+    glyph: "AI",
+    workflowRail: ["Intake", "Issue map", "Lawyer handoff"],
+    documentPreview: ["Conversation summary", "Escalation note", "Client-ready answer"],
   },
   "legal-research": {
     title: "Interactive Research demo",
@@ -35,6 +38,9 @@ const professionalDemoConfig = {
     visualTitle: "Research lanes and memo assembly",
     visualSummary: "Present authority capture, issue decomposition, and memo-ready output in one clear visual system.",
     previewLabels: ["Authority lane", "Issue tree", "Memo draft"],
+    glyph: "RS",
+    workflowRail: ["Scope", "Authorities", "Memo build"],
+    documentPreview: ["Authority extract", "Issue matrix", "Internal memo"],
   },
   "ai-retrieval": {
     title: "Interactive Retrieval demo",
@@ -46,6 +52,9 @@ const professionalDemoConfig = {
     visualTitle: "Retrieval clusters and result triage",
     visualSummary: "Show which matches are direct, analogous, or background so legal users can move faster.",
     previewLabels: ["Direct match", "Analogy cluster", "Export set"],
+    glyph: "RT",
+    workflowRail: ["Search intent", "Cluster", "Export"],
+    documentPreview: ["Result set", "Authority shortlist", "Research handoff"],
   },
   "text-analysis": {
     title: "Interactive Text Analysis demo",
@@ -57,6 +66,9 @@ const professionalDemoConfig = {
     visualTitle: "Clause extraction and timeline mapping",
     visualSummary: "Turn dense material into obligations, timing, and high-risk wording with clearer visibility.",
     previewLabels: ["Clause map", "Timeline", "Risk flags"],
+    glyph: "TX",
+    workflowRail: ["Parse", "Prioritize", "Checklist"],
+    documentPreview: ["Clause summary", "Deadline tracker", "Risk digest"],
   },
   "contract-generation": {
     title: "Interactive Drafting demo",
@@ -68,6 +80,9 @@ const professionalDemoConfig = {
     visualTitle: "Draft assembly and review posture",
     visualSummary: "Make generated documents feel controlled, reviewable, and enterprise-safe from the first screen.",
     previewLabels: ["Clause stack", "Fallback options", "Review pack"],
+    glyph: "DR",
+    workflowRail: ["Inputs", "Draft", "Review pack"],
+    documentPreview: ["First draft", "Clause options", "Approval version"],
   },
   "contract-review": {
     title: "Interactive Review demo",
@@ -79,6 +94,9 @@ const professionalDemoConfig = {
     visualTitle: "Risk scoring and negotiation guidance",
     visualSummary: "Surface priority issues, redline posture, and audience-ready explanation without burying the user in paragraphs.",
     previewLabels: ["Risk score", "Redline lane", "Negotiation note"],
+    glyph: "RV",
+    workflowRail: ["Flag", "Redline", "Negotiate"],
+    documentPreview: ["Risk matrix", "Markup note", "Negotiation summary"],
   },
   "legal-documents": {
     title: "Interactive Legal Documents demo",
@@ -90,7 +108,32 @@ const professionalDemoConfig = {
     visualTitle: "Document packaging and delivery formats",
     visualSummary: "Let legal professionals see how outputs become formal correspondence, notes, and management-ready summaries.",
     previewLabels: ["Letter draft", "Approval format", "Shareable output"],
+    glyph: "LD",
+    workflowRail: ["Template", "Compose", "Package"],
+    documentPreview: ["Formal letter", "Management note", "Delivery format"],
   },
+};
+
+const renderServiceHeroVisual = () => {
+  const config = professionalDemoConfig[activeService];
+  const metricsNode = document.querySelector(".hero-metrics");
+
+  if (!config || !metricsNode || document.querySelector(".service-hero-visual")) {
+    return;
+  }
+
+  const visual = document.createElement("div");
+  visual.className = "service-hero-visual";
+  visual.innerHTML = `
+    <div class="service-glyph">${config.glyph}</div>
+    <div class="service-hero-copy">
+      <span>Service preview</span>
+      <strong>${config.visualTitle}</strong>
+      <p>${config.previewLabels.join(" • ")}</p>
+    </div>
+  `;
+
+  metricsNode.prepend(visual);
 };
 
 const renderProfessionalVisualStudio = () => {
@@ -138,6 +181,79 @@ const renderProfessionalVisualStudio = () => {
   `;
 
   navNode.insertAdjacentElement("afterend", panel);
+};
+
+const renderWorkflowRail = () => {
+  const config = professionalDemoConfig[activeService];
+  const studioNode = document.querySelector(".visual-studio-panel");
+
+  if (!config || !studioNode || document.querySelector(".workflow-rail-panel")) {
+    return;
+  }
+
+  const rail = document.createElement("section");
+  rail.className = "panel workflow-rail-panel";
+  rail.innerHTML = `
+    <div class="panel-head">
+      <h2>Workflow rail</h2>
+      <span class="pill">Operational flow</span>
+    </div>
+    <div class="workflow-rail-grid">
+      ${config.workflowRail
+        .map(
+          (step, index) => `
+            <article class="workflow-step">
+              <span>Step ${index + 1}</span>
+              <strong>${step}</strong>
+              <p>${config.actions[index] || config.actions[config.actions.length - 1]}</p>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+
+  studioNode.insertAdjacentElement("afterend", rail);
+};
+
+const renderDocumentPreviewPanel = () => {
+  const config = professionalDemoConfig[activeService];
+  const deliverPanel = document.querySelector("main .panel");
+
+  if (!config || !deliverPanel || document.querySelector(".document-preview-panel")) {
+    return;
+  }
+
+  const panel = document.createElement("section");
+  panel.className = "panel document-preview-panel";
+  panel.innerHTML = `
+    <div class="panel-head">
+      <h2>Document preview</h2>
+      <span class="pill">Upload and output</span>
+    </div>
+    <div class="document-preview-grid">
+      <div class="upload-zone">
+        <span>Upload lane</span>
+        <strong>Drop document or precedent pack</strong>
+        <p>Simulate an intake area for contracts, notes, authorities, or bilingual source materials.</p>
+        <button class="demo-btn" type="button">Attach sample file</button>
+      </div>
+      <div class="document-stack">
+        ${config.documentPreview
+          .map(
+            (item, index) => `
+              <article class="document-sheet document-sheet-${index + 1}">
+                <span>Artifact ${index + 1}</span>
+                <strong>${item}</strong>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+
+  deliverPanel.insertAdjacentElement("beforebegin", panel);
 };
 
 const renderProfessionalDemoLab = () => {
@@ -243,5 +359,8 @@ const renderProfessionalDemoLab = () => {
   });
 };
 
+renderServiceHeroVisual();
 renderProfessionalDemoLab();
 renderProfessionalVisualStudio();
+renderWorkflowRail();
+renderDocumentPreviewPanel();

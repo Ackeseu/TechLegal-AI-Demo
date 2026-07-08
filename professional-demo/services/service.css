@@ -167,6 +167,58 @@ h1 {
   gap: 10px;
 }
 
+.service-hero-visual {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(79, 216, 199, 0.12), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.service-glyph {
+  display: grid;
+  place-items: center;
+  min-height: 86px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(240, 194, 107, 0.12));
+  color: #f7fbff;
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.service-hero-copy span,
+.upload-zone span,
+.document-sheet span,
+.workflow-step span {
+  display: inline-flex;
+  color: #8ea6c2;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.service-hero-copy strong,
+.upload-zone strong,
+.document-sheet strong,
+.workflow-step strong {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-serif);
+}
+
+.service-hero-copy p,
+.upload-zone p,
+.workflow-step p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .metric {
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -347,6 +399,72 @@ h1 {
 .studio-card ul {
   margin: 14px 0 0;
   padding-left: 18px;
+}
+
+.workflow-rail-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.workflow-step {
+  position: relative;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.workflow-step::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 14px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(79, 216, 199, 0.88), rgba(240, 194, 107, 0.52));
+}
+
+.document-preview-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.1fr);
+  gap: 14px;
+}
+
+.upload-zone,
+.document-sheet {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.upload-zone {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 100%;
+  background: linear-gradient(155deg, rgba(79, 216, 199, 0.12), rgba(255, 255, 255, 0.03));
+}
+
+.document-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.document-sheet-1 {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(79, 216, 199, 0.06));
+}
+
+.document-sheet-2 {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(240, 194, 107, 0.06));
+}
+
+.document-sheet-3 {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(111, 164, 255, 0.08));
 }
 
 .panel-head {
@@ -546,6 +664,8 @@ h1 {
   .card-grid,
   .service-nav,
   .studio-grid,
+  .workflow-rail-grid,
+  .document-preview-grid,
   .demo-result,
   .demo-controls {
     grid-template-columns: 1fr 1fr;
@@ -568,6 +688,8 @@ h1 {
   .service-nav,
   .card-grid,
   .studio-grid,
+  .workflow-rail-grid,
+  .document-preview-grid,
   .demo-result,
   .demo-controls {
     grid-template-columns: 1fr;
