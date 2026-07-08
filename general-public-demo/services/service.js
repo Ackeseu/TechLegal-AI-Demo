@@ -132,8 +132,8 @@ const publicVisualConfig = {
 
 const publicServicePhotoConfig = {
   "ai-chat": {
-    src: "../../assets/screenshots/hk-client-consultation.jpeg",
-    alt: "Client consultation in a Hong Kong law office",
+    src: "../../assets/screenshots/HK-AI-Chat.jpeg",
+    alt: "AI chat in a Hong Kong legal consultation setting",
     caption: "First-contact consultation in plain English",
     focusClass: "focus-consultation",
   },
@@ -144,14 +144,14 @@ const publicServicePhotoConfig = {
     focusClass: "focus-library",
   },
   "ai-retrieval": {
-    src: "../../assets/screenshots/hk-court-final-appeal-exterior.jpeg",
-    alt: "Court of Final Appeal exterior in Hong Kong",
+    src: "../../assets/screenshots/HK-AI-Retrieval.jpeg",
+    alt: "AI retrieval and legal research in Hong Kong",
     caption: "Case and reference retrieval context",
     focusClass: "focus-court-exterior",
   },
   "text-analysis": {
-    src: "../../assets/screenshots/hk-free-legal-advice-scheme.jpeg",
-    alt: "Public legal advice office with documents",
+    src: "../../assets/screenshots/HK-Text-Analysis.jpeg",
+    alt: "Text analysis and document review in Hong Kong",
     caption: "Document intake and structured analysis",
     focusClass: "focus-advice-scheme",
   },
@@ -162,14 +162,14 @@ const publicServicePhotoConfig = {
     focusClass: "focus-commercial",
   },
   "contract-review": {
-    src: "../../assets/screenshots/hk-courtroom-bench-documents.jpeg",
-    alt: "Courtroom bench with legal documents",
+    src: "../../assets/screenshots/HK-Contract_review.jpeg",
+    alt: "Contract review with legal papers and clause analysis",
     caption: "Clause review and risk spotting",
     focusClass: "focus-court-documents",
   },
   "legal-documents": {
-    src: "../../assets/screenshots/hk-court-final-appeal-interior.jpeg",
-    alt: "Court of Final Appeal interior",
+    src: "../../assets/screenshots/HK-Legal-documents.jpeg",
+    alt: "Legal documents and formal drafting in Hong Kong",
     caption: "Formal document standards and structure",
     focusClass: "focus-court-interior",
   },
