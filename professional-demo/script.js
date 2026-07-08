@@ -289,11 +289,14 @@ const outputBadge = document.getElementById("outputBadge");
 const outputPreviewGrid = document.getElementById("outputPreviewGrid");
 const mobileSidebarToggle = document.getElementById("mobileSidebarToggle");
 const professionalSidebar = document.getElementById("professionalSidebar");
+const professionalModeTitle = document.getElementById("professionalModeTitle");
+const professionalModeCopy = document.getElementById("professionalModeCopy");
+const professionalUploadTitle = document.getElementById("professionalUploadTitle");
+const professionalUploadCopy = document.getElementById("professionalUploadCopy");
 
-const backendConfig = {
-  baseUrl: (window.localStorage.getItem("techlegal_api_base_url") || "").trim(),
-  timeoutMs: 14000,
-};
+const sharedConfig = window.TechLegalConfig || { mode: "demo", apiBaseUrl: "" };
+const apiClient = window.TechLegalApiClient;
+let professionalUploadCount = 0;
 
 const escapeHtml = (value) =>
   String(value)
@@ -302,30 +305,6 @@ const escapeHtml = (value) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
-
-const postJson = async (url, payload) => {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), backendConfig.timeoutMs);
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
-    });
-
-    if (!response.ok) {
-      throw new Error(`API request failed with ${response.status}`);
-    }
-
-    return await response.json();
-  } finally {
-    clearTimeout(timeoutId);
-  }
-};
 
 const outputContent = {
   "ask-legal-ai": {
@@ -496,18 +475,38 @@ const normalizeBackendOutput = (payload, viewKey) => {
 };
 
 const fetchWorkspaceOutput = async (viewKey, promptText) => {
-  if (!backendConfig.baseUrl) {
+  if (!apiClient) {
     return null;
   }
 
-  const data = await postJson(`${backendConfig.baseUrl}/v1/professional/analyze`, {
+  const data = await apiClient.requestProfessionalAnalysis({
     workflow: viewKey,
     prompt: promptText,
-    locale: "en-HK",
-    region: "asia",
   });
 
   return normalizeBackendOutput(data, viewKey);
+};
+
+const syncProfessionalIntegrationShell = () => {
+  if (professionalModeTitle && professionalModeCopy) {
+    if (sharedConfig.mode === "live") {
+      professionalModeTitle.textContent = "Live workspace mode";
+      professionalModeCopy.textContent = `Connected to ${sharedConfig.apiBaseUrl} for professional analysis workflows.`;
+    } else {
+      professionalModeTitle.textContent = "Demo workspace";
+      professionalModeCopy.textContent = "Using local demo output until the professional analysis API is configured.";
+    }
+  }
+
+  if (professionalUploadTitle && professionalUploadCopy) {
+    if (professionalUploadCount > 0) {
+      professionalUploadTitle.textContent = `${professionalUploadCount} matter file${professionalUploadCount === 1 ? "" : "s"} linked`;
+      professionalUploadCopy.textContent = "This simulates the production intake queue for contracts, authorities, and matter packs.";
+    } else {
+      professionalUploadTitle.textContent = "No matter files linked";
+      professionalUploadCopy.textContent = "Attach term sheets, agreements, and authorities to mirror the production intake flow.";
+    }
+  }
 };
 
 const renderView = (viewKey) => {
@@ -604,7 +603,15 @@ if (primaryAction && prompt) {
   });
 }
 
+if (secondaryAction) {
+  secondaryAction.addEventListener("click", () => {
+    professionalUploadCount += 1;
+    syncProfessionalIntegrationShell();
+  });
+}
+
 renderView(activeView);
+syncProfessionalIntegrationShell();
 
 if (mobileSidebarToggle && professionalSidebar) {
   mobileSidebarToggle.addEventListener("click", () => {

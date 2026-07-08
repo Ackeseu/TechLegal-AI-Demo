@@ -76,13 +76,17 @@ const resultTitle = document.getElementById("resultTitle");
 const resultBadge = document.getElementById("resultBadge");
 const resultGrid = document.getElementById("resultGrid");
 const generateGuidanceBtn = document.getElementById("generateGuidanceBtn");
+const attachPublicFileBtn = document.getElementById("attachPublicFileBtn");
+const publicModeTitle = document.getElementById("publicModeTitle");
+const publicModeCopy = document.getElementById("publicModeCopy");
+const publicUploadTitle = document.getElementById("publicUploadTitle");
+const publicUploadCopy = document.getElementById("publicUploadCopy");
 
 let activeMode = "ask";
+let publicUploadCount = 0;
 
-const backendConfig = {
-  baseUrl: (window.localStorage.getItem("techlegal_api_base_url") || "").trim(),
-  timeoutMs: 12000,
-};
+const sharedConfig = window.TechLegalConfig || { mode: "demo", apiBaseUrl: "" };
+const apiClient = window.TechLegalApiClient;
 
 const escapeHtml = (value) =>
   String(value)
@@ -91,30 +95,6 @@ const escapeHtml = (value) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
-
-const postJson = async (url, payload) => {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), backendConfig.timeoutMs);
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
-    });
-
-    if (!response.ok) {
-      throw new Error(`API request failed with ${response.status}`);
-    }
-
-    return await response.json();
-  } finally {
-    clearTimeout(timeoutId);
-  }
-};
 
 const normalizeBackendContent = (payload) => {
   if (!payload || typeof payload !== "object") {
@@ -139,18 +119,38 @@ const normalizeBackendContent = (payload) => {
 };
 
 const fetchGuidanceContent = async (mode, promptText) => {
-  if (!backendConfig.baseUrl) {
+  if (!apiClient) {
     return null;
   }
 
-  const data = await postJson(`${backendConfig.baseUrl}/v1/public/guidance`, {
+  const data = await apiClient.requestPublicGuidance({
     mode,
     prompt: promptText,
-    locale: "en-HK",
-    region: "asia",
   });
 
   return normalizeBackendContent(data);
+};
+
+const syncPublicIntegrationShell = () => {
+  if (publicModeTitle && publicModeCopy) {
+    if (sharedConfig.mode === "live") {
+      publicModeTitle.textContent = "Live API mode";
+      publicModeCopy.textContent = `Connected to ${sharedConfig.apiBaseUrl} for live public guidance responses.`;
+    } else {
+      publicModeTitle.textContent = "Demo mode";
+      publicModeCopy.textContent = "Using built-in mock guidance until a live API base URL is configured.";
+    }
+  }
+
+  if (publicUploadTitle && publicUploadCopy) {
+    if (publicUploadCount > 0) {
+      publicUploadTitle.textContent = `${publicUploadCount} file${publicUploadCount === 1 ? "" : "s"} attached`;
+      publicUploadCopy.textContent = "Backend-ready upload state is simulated here so future document analysis can plug in cleanly.";
+    } else {
+      publicUploadTitle.textContent = "No files attached";
+      publicUploadCopy.textContent = "Attach tenancy records, contracts, or letters to prepare for backend document handling.";
+    }
+  }
 };
 
 const renderResultPreview = (overrideContent = null) => {
@@ -190,6 +190,13 @@ for (const suggestion of document.querySelectorAll(".suggestion")) {
   });
 }
 
+if (attachPublicFileBtn) {
+  attachPublicFileBtn.addEventListener("click", () => {
+    publicUploadCount += 1;
+    syncPublicIntegrationShell();
+  });
+}
+
 generateGuidanceBtn.addEventListener("click", async () => {
   const originalLabel = generateGuidanceBtn.textContent;
   generateGuidanceBtn.disabled = true;
@@ -208,3 +215,4 @@ generateGuidanceBtn.addEventListener("click", async () => {
 });
 
 renderResultPreview();
+syncPublicIntegrationShell();

@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="techlegal-locale" content="en-HK" />
+    <meta name="techlegal-region" content="asia" />
     <title>TechLegalAI | Professional Legal Workspace</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -198,6 +200,19 @@
               <span>Cross-border matters</span>
               <span>Board and governance</span>
             </div>
+
+            <section class="integration-shell professional-shell" aria-label="Professional integration status and intake queue">
+              <article class="integration-card dark">
+                <span>Platform mode</span>
+                <strong id="professionalModeTitle">Demo workspace</strong>
+                <p id="professionalModeCopy">Using local demo output until the professional analysis API is configured.</p>
+              </article>
+              <article class="integration-card dark upload-card">
+                <span>Matter intake</span>
+                <strong id="professionalUploadTitle">No matter files linked</strong>
+                <p id="professionalUploadCopy">Attach term sheets, agreements, and authorities to mirror the production intake flow.</p>
+              </article>
+            </section>
           </article>
 
           <aside class="insight-panel">
@@ -348,6 +363,8 @@
       </main>
     </div>
 
+    <script src="../shared/app-config.js"></script>
+    <script src="../shared/api-client.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="techlegal-locale" content="en-HK" />
+    <meta name="techlegal-region" content="asia" />
     <title>TechLegalAI | Everyday Legal Help</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -109,8 +111,21 @@
 
           <div class="workspace-actions">
             <button class="primary-button large" id="generateGuidanceBtn">Get guidance</button>
-            <button class="soft-button">Attach file</button>
+            <button class="soft-button" id="attachPublicFileBtn">Attach file</button>
           </div>
+
+          <section class="integration-shell" aria-label="Integration status and uploads">
+            <article class="integration-card">
+              <span>Connection mode</span>
+              <strong id="publicModeTitle">Demo mode</strong>
+              <p id="publicModeCopy">Using built-in mock guidance until a live API base URL is configured.</p>
+            </article>
+            <article class="integration-card upload-card">
+              <span>Upload queue</span>
+              <strong id="publicUploadTitle">No files attached</strong>
+              <p id="publicUploadCopy">Attach tenancy records, contracts, or letters to prepare for backend document handling.</p>
+            </article>
+          </section>
 
           <div class="suggestions">
             <button class="suggestion tone-tenancy">Tenant deposit dispute</button>
@@ -290,6 +305,8 @@
       </section>
     </main>
 
+    <script src="../shared/app-config.js"></script>
+    <script src="../shared/api-client.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
