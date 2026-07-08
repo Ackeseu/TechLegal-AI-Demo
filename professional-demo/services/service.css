@@ -181,12 +181,43 @@ h1 {
 
 .service-hero-visual {
   display: grid;
-  grid-template-columns: 86px minmax(0, 1fr);
   gap: 14px;
   padding: 16px;
   border-radius: 18px;
   background: linear-gradient(145deg, rgba(79, 216, 199, 0.12), rgba(255, 255, 255, 0.03));
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.service-hero-photo-wrap {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.service-hero-photo {
+  width: 100%;
+  height: 132px;
+  display: block;
+  object-fit: cover;
+  filter: saturate(0.94) contrast(1.04);
+}
+
+.service-hero-photo-wrap figcaption {
+  padding: 8px 10px;
+  color: #8ea6c2;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.service-hero-snapshot {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 14px;
 }
 
 .service-glyph {
@@ -200,6 +231,34 @@ h1 {
   font-size: 1.55rem;
   font-weight: 800;
   letter-spacing: 0.04em;
+}
+
+.focus-consultation {
+  object-position: 52% 40%;
+}
+
+.focus-library {
+  object-position: 52% 36%;
+}
+
+.focus-court-exterior {
+  object-position: 50% 32%;
+}
+
+.focus-advice-scheme {
+  object-position: 56% 42%;
+}
+
+.focus-commercial {
+  object-position: 56% 38%;
+}
+
+.focus-court-documents {
+  object-position: 56% 45%;
+}
+
+.focus-court-interior {
+  object-position: 54% 42%;
 }
 
 .service-hero-copy span,
@@ -786,6 +845,10 @@ h1 {
   .hero {
     grid-template-columns: 1fr;
   }
+
+  .service-hero-photo {
+    height: 122px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -807,6 +870,26 @@ h1 {
   .demo-result,
   .demo-controls {
     grid-template-columns: 1fr;
+  }
+
+  .service-hero-snapshot {
+    grid-template-columns: 1fr;
+  }
+
+  .service-glyph {
+    min-height: 64px;
+  }
+
+  .service-hero-photo {
+    height: 114px;
+  }
+
+  .focus-advice-scheme {
+    object-position: 60% 40%;
+  }
+
+  .focus-court-documents {
+    object-position: 58% 44%;
   }
 
   .panel-head {

@@ -1016,21 +1016,39 @@ h1 {
 }
 
 .service-page-card {
+  --card-pad: 18px;
   display: grid;
   gap: 10px;
-  padding: 18px;
+  padding: var(--card-pad);
   border-radius: 20px;
   text-decoration: none;
   color: inherit;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.service-page-thumb {
+  width: calc(100% + (var(--card-pad) * 2));
+  height: 132px;
+  margin: calc(var(--card-pad) * -1) calc(var(--card-pad) * -1) 8px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  filter: saturate(0.92) contrast(1.04);
+  transition: transform 220ms ease, filter 220ms ease;
 }
 
 .service-page-card:hover {
   transform: translateY(-2px);
   border-color: rgba(110, 231, 200, 0.45);
   background: rgba(255, 255, 255, 0.06);
+}
+
+.service-page-card:hover .service-page-thumb {
+  transform: scale(1.03);
+  filter: saturate(1) contrast(1.06);
 }
 
 .service-page-card span {
@@ -1103,6 +1121,10 @@ h1 {
   .masthead-tools .cta-secondary {
     grid-column: auto;
   }
+
+  .service-page-thumb {
+    height: 120px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -1137,6 +1159,14 @@ h1 {
 
   .service-page-grid {
     grid-template-columns: 1fr;
+  }
+
+  .service-page-card {
+    --card-pad: 16px;
+  }
+
+  .service-page-thumb {
+    height: 114px;
   }
 
   .row {

@@ -152,6 +152,51 @@ const professionalSceneConfig = {
   },
 };
 
+const professionalServicePhotoConfig = {
+  "ai-chat": {
+    src: "../../assets/screenshots/HK-AI-Chat.jpeg",
+    alt: "AI chat in a Hong Kong legal consultation setting",
+    caption: "Matter intake and issue routing",
+    focusClass: "focus-consultation",
+  },
+  "legal-research": {
+    src: "../../assets/screenshots/HK-Legal-Research.jpeg",
+    alt: "Legal research and reference review in Hong Kong",
+    caption: "Authority lanes and memo assembly",
+    focusClass: "focus-library",
+  },
+  "ai-retrieval": {
+    src: "../../assets/screenshots/HK-AI-Retrieval.jpeg",
+    alt: "AI retrieval and legal research in Hong Kong",
+    caption: "Retrieval clusters and result triage",
+    focusClass: "focus-court-exterior",
+  },
+  "text-analysis": {
+    src: "../../assets/screenshots/HK-Text-Analysis.jpeg",
+    alt: "Text analysis and document review in Hong Kong",
+    caption: "Clause extraction and timeline mapping",
+    focusClass: "focus-advice-scheme",
+  },
+  "contract-generation": {
+    src: "../../assets/screenshots/HK-Contract-Generation.jpeg",
+    alt: "Contract generation and drafting in a Hong Kong business setting",
+    caption: "Draft assembly and review posture",
+    focusClass: "focus-commercial",
+  },
+  "contract-review": {
+    src: "../../assets/screenshots/HK-Contract_review.jpeg",
+    alt: "Contract review with legal papers and clause analysis",
+    caption: "Risk scoring and negotiation guidance",
+    focusClass: "focus-court-documents",
+  },
+  "legal-documents": {
+    src: "../../assets/screenshots/HK-Legal-documents.jpeg",
+    alt: "Legal documents and formal drafting in Hong Kong",
+    caption: "Document packaging and delivery formats",
+    focusClass: "focus-court-interior",
+  },
+};
+
 const professionalSceneTemplates = {
   court: {
     label: "Hong Kong court context",
@@ -232,6 +277,7 @@ const professionalSceneTemplates = {
 
 const renderServiceHeroVisual = () => {
   const config = professionalDemoConfig[activeService];
+  const photoConfig = professionalServicePhotoConfig[activeService];
   const metricsNode = document.querySelector(".hero-metrics");
 
   if (!config || !metricsNode || document.querySelector(".service-hero-visual")) {
@@ -241,11 +287,28 @@ const renderServiceHeroVisual = () => {
   const visual = document.createElement("div");
   visual.className = "service-hero-visual";
   visual.innerHTML = `
-    <div class="service-glyph">${config.glyph}</div>
-    <div class="service-hero-copy">
-      <span>Service preview</span>
-      <strong>${config.visualTitle}</strong>
-      <p>${config.previewLabels.join(" • ")}</p>
+    ${
+      photoConfig
+        ? `
+      <figure class="service-hero-photo-wrap">
+        <img
+          class="service-hero-photo ${photoConfig.focusClass}"
+          src="${photoConfig.src}"
+          alt="${photoConfig.alt}"
+          loading="lazy"
+        />
+        <figcaption>${photoConfig.caption}</figcaption>
+      </figure>
+    `
+        : ""
+    }
+    <div class="service-hero-snapshot">
+      <div class="service-glyph">${config.glyph}</div>
+      <div class="service-hero-copy">
+        <span>Service preview</span>
+        <strong>${config.visualTitle}</strong>
+        <p>${config.previewLabels.join(" • ")}</p>
+      </div>
     </div>
   `;
 
