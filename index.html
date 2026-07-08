@@ -266,6 +266,17 @@
         opacity: 0.9;
       }
 
+      .card::after {
+        content: "";
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        border-radius: 28px;
+        pointer-events: none;
+        opacity: 0.45;
+        transform: rotate(12deg);
+      }
+
       .card > * {
         position: relative;
         z-index: 1;
@@ -289,6 +300,14 @@
           radial-gradient(circle at 100% 100%, rgba(6, 95, 70, 0.12), transparent 32%);
       }
 
+      .card.professional::after {
+        top: -40px;
+        right: -28px;
+        background:
+          linear-gradient(180deg, rgba(87, 219, 200, 0.18), rgba(9, 49, 53, 0.02));
+        border: 1px solid rgba(87, 219, 200, 0.18);
+      }
+
       .card.public {
         background:
           linear-gradient(180deg, rgba(251, 244, 234, 0.98), rgba(240, 248, 240, 0.96));
@@ -299,6 +318,15 @@
         background:
           radial-gradient(circle at 100% 0%, rgba(255, 154, 60, 0.18), transparent 34%),
           radial-gradient(circle at 0% 100%, rgba(87, 219, 200, 0.12), transparent 32%);
+      }
+
+      .card.public::after {
+        right: -34px;
+        bottom: -54px;
+        background:
+          linear-gradient(180deg, rgba(255, 154, 60, 0.16), rgba(255, 255, 255, 0.02));
+        border: 1px solid rgba(255, 154, 60, 0.18);
+        transform: rotate(-14deg);
       }
 
       .card.professional:hover {
@@ -363,6 +391,43 @@
 
       .card.public .meta strong {
         color: #f48117;
+      }
+
+      .card-topline {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .card-badge {
+        flex: 1 1 auto;
+      }
+
+      .card-icon {
+        flex: 0 0 auto;
+        width: 60px;
+        height: 60px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32);
+      }
+
+      .card-icon svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .card.professional .card-icon {
+        background: linear-gradient(160deg, rgba(87, 219, 200, 0.22), rgba(255, 255, 255, 0.72));
+        color: #0b7467;
+      }
+
+      .card.public .card-icon {
+        background: linear-gradient(160deg, rgba(255, 154, 60, 0.2), rgba(255, 255, 255, 0.72));
+        color: #d96a00;
       }
 
       @media (max-width: 760px) {
@@ -436,7 +501,19 @@
       </section>
       <section class="grid" aria-label="Available demos">
         <a class="card professional" href="./professional-demo/services/ai-chat.html">
-          <span>Professional Services</span>
+          <div class="card-topline">
+            <div class="card-badge">
+              <span>Professional Services</span>
+            </div>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 5.75h7.5L18 10.25V18.5a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 18.5v-11A1.75 1.75 0 0 1 6.75 5.75Z" />
+                <path d="M13.5 5.75V10h4.25" />
+                <path d="M8.5 13h7" />
+                <path d="M8.5 16h5" />
+              </svg>
+            </div>
+          </div>
           <h2>Professional Service Stack</h2>
           <p>
             Multi-page service architecture aligned with the reference product model: AI Chat,
@@ -449,7 +526,18 @@
           </div>
         </a>
         <a class="card public" href="./general-public-demo/services/ai-chat.html">
-          <span>Public Services</span>
+          <div class="card-topline">
+            <div class="card-badge">
+              <span>Public Services</span>
+            </div>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 4.75c4.28 0 7.75 2.82 7.75 6.3 0 3.49-3.47 6.31-7.75 6.31-.75 0-1.48-.09-2.18-.26L5.5 19l1.33-3.23C5.4 14.63 4.25 12.93 4.25 11.05c0-3.48 3.47-6.3 7.75-6.3Z" />
+                <path d="M8.5 10.75h7" />
+                <path d="M8.5 13.5h4.5" />
+              </svg>
+            </div>
+          </div>
           <h2>Public Service Pages</h2>
           <p>
             A public-friendly service stack in plain English for individuals and SMEs in Hong Kong
