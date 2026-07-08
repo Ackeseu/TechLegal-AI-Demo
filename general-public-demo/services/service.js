@@ -130,6 +130,51 @@ const publicVisualConfig = {
   },
 };
 
+const publicServicePhotoConfig = {
+  "ai-chat": {
+    src: "../../assets/screenshots/hk-client-consultation.jpeg",
+    alt: "Client consultation in a Hong Kong law office",
+    caption: "First-contact consultation in plain English",
+    focusClass: "focus-consultation",
+  },
+  "legal-research": {
+    src: "../../assets/screenshots/hk-law-library-research.jpeg",
+    alt: "Legal research scene in a law library",
+    caption: "Clause-by-clause research support",
+    focusClass: "focus-library",
+  },
+  "ai-retrieval": {
+    src: "../../assets/screenshots/hk-court-final-appeal-exterior.jpeg",
+    alt: "Court of Final Appeal exterior in Hong Kong",
+    caption: "Case and reference retrieval context",
+    focusClass: "focus-court-exterior",
+  },
+  "text-analysis": {
+    src: "../../assets/screenshots/hk-free-legal-advice-scheme.jpeg",
+    alt: "Public legal advice office with documents",
+    caption: "Document intake and structured analysis",
+    focusClass: "focus-advice-scheme",
+  },
+  "contract-generation": {
+    src: "../../assets/screenshots/hk-commercial-negotiation.jpeg",
+    alt: "Commercial legal meeting in Hong Kong",
+    caption: "Drafting for business and cross-border use",
+    focusClass: "focus-commercial",
+  },
+  "contract-review": {
+    src: "../../assets/screenshots/hk-courtroom-bench-documents.jpeg",
+    alt: "Courtroom bench with legal documents",
+    caption: "Clause review and risk spotting",
+    focusClass: "focus-court-documents",
+  },
+  "legal-documents": {
+    src: "../../assets/screenshots/hk-court-final-appeal-interior.jpeg",
+    alt: "Court of Final Appeal interior",
+    caption: "Formal document standards and structure",
+    focusClass: "focus-court-interior",
+  },
+};
+
 const publicSceneConfig = {
   "ai-chat": {
     lead: "Helpful legal discussion in plain English",
@@ -248,6 +293,7 @@ const publicSceneTemplates = {
 
 const renderPublicServiceHeroVisual = () => {
   const config = publicVisualConfig[activeService];
+  const photoConfig = publicServicePhotoConfig[activeService];
   const metricsNode = document.querySelector(".hero-metrics");
 
   if (!config || !metricsNode || document.querySelector(".service-hero-visual")) {
@@ -257,11 +303,28 @@ const renderPublicServiceHeroVisual = () => {
   const visual = document.createElement("div");
   visual.className = "service-hero-visual";
   visual.innerHTML = `
-    <div class="service-glyph">${config.glyph}</div>
-    <div class="service-hero-copy">
-      <span>Service preview</span>
-      <strong>${config.visualTitle}</strong>
-      <p>${config.previewLabels.join(" • ")}</p>
+    ${
+      photoConfig
+        ? `
+      <figure class="service-hero-photo-wrap">
+        <img
+          class="service-hero-photo ${photoConfig.focusClass}"
+          src="${photoConfig.src}"
+          alt="${photoConfig.alt}"
+          loading="lazy"
+        />
+        <figcaption>${photoConfig.caption}</figcaption>
+      </figure>
+    `
+        : ""
+    }
+    <div class="service-hero-snapshot">
+      <div class="service-glyph">${config.glyph}</div>
+      <div class="service-hero-copy">
+        <span>Service preview</span>
+        <strong>${config.visualTitle}</strong>
+        <p>${config.previewLabels.join(" • ")}</p>
+      </div>
     </div>
   `;
 
