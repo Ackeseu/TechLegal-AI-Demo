@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap");
+
 :root {
   color-scheme: dark;
   --bg: #09111a;
@@ -5,8 +7,8 @@
   --panel: #111d2b;
   --panel-2: #132234;
   --panel-3: rgba(255, 255, 255, 0.04);
-  --font-sans: "Inter", "Manrope", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Inter", "Manrope", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Inter", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Plus Jakarta Sans", "Inter", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --ink: #f5f7fb;
   --muted: #9eb0c6;
   --line: rgba(255, 255, 255, 0.09);
