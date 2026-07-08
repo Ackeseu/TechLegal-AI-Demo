@@ -114,6 +114,37 @@ const professionalDemoConfig = {
   },
 };
 
+const professionalSceneConfig = {
+  "ai-chat": {
+    lead: "Court-side intake and legal desk triage",
+    support: "From initial narrative to structured matter handling for Hong Kong-focused legal teams.",
+  },
+  "legal-research": {
+    lead: "Authority review with courtroom and library context",
+    support: "Blend case-building discipline with practical memo production for regional work.",
+  },
+  "ai-retrieval": {
+    lead: "Case retrieval lanes with operational legal context",
+    support: "Visualize search, ranking, and handoff as a desk-to-court continuum.",
+  },
+  "text-analysis": {
+    lead: "Document parsing in a formal legal workspace",
+    support: "Turn dense contractual language into decision-ready legal outputs.",
+  },
+  "contract-generation": {
+    lead: "Drafting room workflows for enterprise contracting",
+    support: "Generate first drafts with clear review posture and courtroom-safe structure.",
+  },
+  "contract-review": {
+    lead: "Risk review with judicial and desk-level framing",
+    support: "Highlight redline priorities while preserving legal team clarity.",
+  },
+  "legal-documents": {
+    lead: "Formal document packaging with court-aware presentation",
+    support: "Prepare letters, notices, and management summaries with production polish.",
+  },
+};
+
 const renderServiceHeroVisual = () => {
   const config = professionalDemoConfig[activeService];
   const metricsNode = document.querySelector(".hero-metrics");
@@ -256,6 +287,77 @@ const renderDocumentPreviewPanel = () => {
   deliverPanel.insertAdjacentElement("beforebegin", panel);
 };
 
+const renderProfessionalSceneGallery = () => {
+  const config = professionalSceneConfig[activeService];
+  const workflowNode = document.querySelector(".workflow-rail-panel") || document.querySelector(".visual-studio-panel");
+
+  if (!config || !workflowNode || document.querySelector(".scene-gallery-panel")) {
+    return;
+  }
+
+  const panel = document.createElement("section");
+  panel.className = "panel scene-gallery-panel";
+  panel.innerHTML = `
+    <div class="panel-head">
+      <h2>Generated legal scenes</h2>
+      <span class="pill">Professional visual pack</span>
+    </div>
+    <p class="scene-summary"><strong>${config.lead}</strong> ${config.support}</p>
+    <div class="scene-grid">
+      <article class="scene-card">
+        <span>Hong Kong court context</span>
+        <strong>Court building and case framing</strong>
+        <div class="scene-art scene-art-court" aria-hidden="true">
+          <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+            <rect x="0" y="0" width="320" height="180" rx="18" fill="url(#courtBg)" />
+            <rect x="34" y="88" width="252" height="68" rx="8" fill="rgba(10,21,34,0.72)" stroke="rgba(255,255,255,0.18)" />
+            <rect x="56" y="58" width="208" height="14" rx="4" fill="rgba(79,216,199,0.38)" />
+            <rect x="64" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+            <rect x="104" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+            <rect x="144" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+            <rect x="184" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+            <rect x="224" y="72" width="16" height="72" rx="4" fill="rgba(255,255,255,0.65)" />
+            <path d="M34 88 160 24 286 88" fill="rgba(240,194,107,0.26)" stroke="rgba(240,194,107,0.52)" stroke-width="2" />
+            <circle cx="270" cy="38" r="18" fill="rgba(79,216,199,0.26)" />
+            <defs>
+              <linearGradient id="courtBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="rgba(16,39,58,0.95)" />
+                <stop offset="100%" stop-color="rgba(9,23,37,0.9)" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </article>
+      <article class="scene-card">
+        <span>Legal desk workflow</span>
+        <strong>Books, case files, and strategy board</strong>
+        <div class="scene-art scene-art-desk" aria-hidden="true">
+          <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+            <rect x="0" y="0" width="320" height="180" rx="18" fill="url(#deskBg)" />
+            <rect x="30" y="120" width="260" height="28" rx="8" fill="rgba(16,30,47,0.78)" />
+            <rect x="42" y="78" width="56" height="42" rx="6" fill="rgba(79,216,199,0.26)" stroke="rgba(79,216,199,0.6)" />
+            <rect x="102" y="72" width="22" height="48" rx="4" fill="rgba(255,255,255,0.74)" />
+            <rect x="126" y="66" width="22" height="54" rx="4" fill="rgba(240,194,107,0.62)" />
+            <rect x="150" y="70" width="22" height="50" rx="4" fill="rgba(255,255,255,0.66)" />
+            <rect x="178" y="88" width="92" height="24" rx="6" fill="rgba(18,42,64,0.82)" stroke="rgba(255,255,255,0.2)" />
+            <path d="M200 66h42v22h-42z" fill="rgba(240,194,107,0.34)" stroke="rgba(240,194,107,0.6)" />
+            <path d="M212 78h18" stroke="rgba(255,255,255,0.76)" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="274" cy="48" r="14" fill="rgba(255,255,255,0.12)" />
+            <defs>
+              <linearGradient id="deskBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="rgba(11,29,44,0.96)" />
+                <stop offset="100%" stop-color="rgba(22,34,51,0.9)" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </article>
+    </div>
+  `;
+
+  workflowNode.insertAdjacentElement("afterend", panel);
+};
+
 const renderProfessionalDemoLab = () => {
   const config = professionalDemoConfig[activeService];
   const mainNode = document.querySelector("main");
@@ -360,7 +462,8 @@ const renderProfessionalDemoLab = () => {
 };
 
 renderServiceHeroVisual();
-renderProfessionalDemoLab();
 renderProfessionalVisualStudio();
 renderWorkflowRail();
+renderProfessionalSceneGallery();
 renderDocumentPreviewPanel();
+renderProfessionalDemoLab();
