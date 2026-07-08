@@ -1134,12 +1134,16 @@ h1 {
 }
 
 .service-headline-image {
+  position: relative;
   width: calc(100% + (var(--card-pad) * 2));
   height: 132px;
   margin: calc(var(--card-pad) * -1) calc(var(--card-pad) * -1) 8px;
   object-fit: cover;
   display: block;
   border-bottom: 1px solid rgba(23, 32, 44, 0.1);
+  filter: saturate(0.9) contrast(1.04);
+  transform: translateZ(0);
+  transition: transform 220ms ease, filter 220ms ease;
 }
 
 .public-service-card:nth-child(3n + 1) {
@@ -1161,6 +1165,11 @@ h1 {
   transform: translateY(-2px);
   border-color: rgba(15, 118, 110, 0.34);
   box-shadow: 0 20px 36px rgba(68, 40, 12, 0.1);
+}
+
+.public-service-card:hover .service-headline-image {
+  transform: scale(1.03);
+  filter: saturate(1) contrast(1.06);
 }
 
 .public-service-card span {
